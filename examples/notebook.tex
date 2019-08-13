@@ -1,0 +1,1184 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{write\_up}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \subsection{Advanced Lane Finding
+Project}\label{advanced-lane-finding-project}
+
+The goals / steps of this project are the following:
+
+\begin{itemize}
+\tightlist
+\item
+  Compute the camera calibration matrix and distortion coefficients
+  given a set of chessboard images.
+\item
+  Apply a distortion correction to raw images.
+\item
+  Use color transforms, gradients, etc., to create a thresholded binary
+  image.
+\item
+  Apply a perspective transform to rectify binary image ("birds-eye
+  view").
+\item
+  Detect lane pixels and fit to find the lane boundary.
+\item
+  Determine the curvature of the lane and vehicle position with respect
+  to center.
+\item
+  Warp the detected lane boundaries back onto the original image.
+\item
+  Output visual display of the lane boundaries and numerical estimation
+  of lane curvature and vehicle position.
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+\subsection{First, I'll compute the camera calibration using chessboard
+images, and extract the object points and images
+points}\label{first-ill-compute-the-camera-calibration-using-chessboard-images-and-extract-the-object-points-and-images-points}
+
+    \subsection{Compute camera calibration and distortion correction for
+chessboard
+images}\label{compute-camera-calibration-and-distortion-correction-for-chessboard-images}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}61}]:} \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+         \PY{k+kn}{import} \PY{n+nn}{cv2}
+         \PY{k+kn}{import} \PY{n+nn}{glob}
+         \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+         \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline
+         
+         \PY{c+c1}{\PYZsh{} prepare object points, like (0,0,0), (1,0,0), (2,0,0) ....,(6,5,0)}
+         \PY{n}{nx}\PY{o}{=}\PY{l+m+mi}{9}
+         \PY{n}{ny}\PY{o}{=}\PY{l+m+mi}{6}
+         \PY{n}{objp} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{n}{nx}\PY{o}{*}\PY{n}{ny}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{)}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{float32}\PY{p}{)}
+         \PY{n}{objp}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{p}{:}\PY{l+m+mi}{2}\PY{p}{]} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{mgrid}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{:}\PY{n}{nx}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{:}\PY{n}{ny}\PY{p}{]}\PY{o}{.}\PY{n}{T}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Arrays to store object points and image points from all the images.}
+         \PY{n}{objpoints} \PY{o}{=} \PY{p}{[}\PY{p}{]} \PY{c+c1}{\PYZsh{} 3d points in real world space}
+         \PY{n}{imgpoints} \PY{o}{=} \PY{p}{[}\PY{p}{]} \PY{c+c1}{\PYZsh{} 2d points in image plane.}
+         
+         \PY{n}{fig}\PY{p}{,} \PY{n}{axs} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{l+m+mi}{5}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{,} \PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{16}\PY{p}{,} \PY{l+m+mi}{11}\PY{p}{)}\PY{p}{)}
+         \PY{n}{fig}\PY{o}{.}\PY{n}{subplots\PYZus{}adjust}\PY{p}{(}\PY{n}{hspace} \PY{o}{=} \PY{o}{.}\PY{l+m+mi}{2}\PY{p}{,} \PY{n}{wspace}\PY{o}{=}\PY{o}{.}\PY{l+m+mi}{001}\PY{p}{)}
+         \PY{n}{axs} \PY{o}{=} \PY{n}{axs}\PY{o}{.}\PY{n}{ravel}\PY{p}{(}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{} Make a list of calibration images}
+         \PY{n}{images} \PY{o}{=} \PY{n}{glob}\PY{o}{.}\PY{n}{glob}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{../camera\PYZus{}cal/calibration*.jpg}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Step through the list and search for chessboard corners}
+         \PY{k}{for} \PY{n}{i}\PY{p}{,} \PY{n}{fname} \PY{o+ow}{in} \PY{n+nb}{enumerate}\PY{p}{(}\PY{n}{images}\PY{p}{)}\PY{p}{:}
+             \PY{n}{img} \PY{o}{=} \PY{n}{cv2}\PY{o}{.}\PY{n}{imread}\PY{p}{(}\PY{n}{fname}\PY{p}{)}
+             \PY{n}{gray} \PY{o}{=} \PY{n}{cv2}\PY{o}{.}\PY{n}{cvtColor}\PY{p}{(}\PY{n}{img}\PY{p}{,}\PY{n}{cv2}\PY{o}{.}\PY{n}{COLOR\PYZus{}BGR2GRAY}\PY{p}{)}
+         
+             \PY{c+c1}{\PYZsh{} Find the chessboard corners}
+             \PY{n}{ret}\PY{p}{,} \PY{n}{corners} \PY{o}{=} \PY{n}{cv2}\PY{o}{.}\PY{n}{findChessboardCorners}\PY{p}{(}\PY{n}{gray}\PY{p}{,} \PY{p}{(}\PY{l+m+mi}{9}\PY{p}{,}\PY{l+m+mi}{6}\PY{p}{)}\PY{p}{,}\PY{k+kc}{None}\PY{p}{)}
+             
+         
+             \PY{c+c1}{\PYZsh{} If found, add object points, image points}
+             \PY{k}{if} \PY{n}{ret} \PY{o}{==} \PY{k+kc}{True}\PY{p}{:}
+                 \PY{n}{objpoints}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{objp}\PY{p}{)}
+                 \PY{n}{imgpoints}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{corners}\PY{p}{)}
+                 \PY{c+c1}{\PYZsh{}ret, mtx, dist, rvecs, tvecs = cv2.calibrateCamera(objpoints, imgpoints, gray.shape[::\PYZhy{}1], None, None)}
+         
+                 \PY{c+c1}{\PYZsh{} Draw and display the corners}
+                 \PY{n}{img} \PY{o}{=} \PY{n}{cv2}\PY{o}{.}\PY{n}{drawChessboardCorners}\PY{p}{(}\PY{n}{img}\PY{p}{,} \PY{p}{(}\PY{l+m+mi}{9}\PY{p}{,}\PY{l+m+mi}{6}\PY{p}{)}\PY{p}{,} \PY{n}{corners}\PY{p}{,} \PY{n}{ret}\PY{p}{)}
+                 \PY{n}{axs}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{o}{.}\PY{n}{axis}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{off}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                 \PY{n}{axs}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{img}\PY{p}{)}
+                 \PY{c+c1}{\PYZsh{}plt.imshow(\PYZsq{}img\PYZsq{},img)}
+                 \PY{c+c1}{\PYZsh{}cv2.waitKey(500)}
+         
+         \PY{c+c1}{\PYZsh{}cv2.destroyAllWindows()}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_2_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subsection{Undistort and unwarp the images using camera calibration and
+perspective transform for
+Chessboards}\label{undistort-and-unwarp-the-images-using-camera-calibration-and-perspective-transform-for-chessboards}
+
+\subsubsection{- In this section, objection points and image points are
+calculated based on a set of chessboard images, and then compute camera
+matrix and distortion coefficients using
+cv2.calibrateCamera}\label{in-this-section-objection-points-and-image-points-are-calculated-based-on-a-set-of-chessboard-images-and-then-compute-camera-matrix-and-distortion-coefficients-using-cv2.calibratecamera}
+
+\subsubsection{- Using perspective transform to get the "bird view"
+image}\label{using-perspective-transform-to-get-the-bird-view-image}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}60}]:} \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+         \PY{k+kn}{import} \PY{n+nn}{cv2}
+         \PY{k+kn}{import} \PY{n+nn}{glob}
+         \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+         \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline
+         
+         \PY{c+c1}{\PYZsh{} prepare object points, like (0,0,0), (1,0,0), (2,0,0) ....,(6,5,0)}
+         \PY{n}{nx}\PY{o}{=}\PY{l+m+mi}{9}
+         \PY{n}{ny}\PY{o}{=}\PY{l+m+mi}{6}
+         \PY{n}{objp} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{n}{nx}\PY{o}{*}\PY{n}{ny}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{)}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{float32}\PY{p}{)}
+         \PY{n}{objp}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{p}{:}\PY{l+m+mi}{2}\PY{p}{]} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{mgrid}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{:}\PY{n}{nx}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{:}\PY{n}{ny}\PY{p}{]}\PY{o}{.}\PY{n}{T}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Arrays to store object points and image points from all the images.}
+         \PY{n}{objpoints} \PY{o}{=} \PY{p}{[}\PY{p}{]} \PY{c+c1}{\PYZsh{} 3d points in real world space}
+         \PY{n}{imgpoints} \PY{o}{=} \PY{p}{[}\PY{p}{]} \PY{c+c1}{\PYZsh{} 2d points in image plane.}
+         
+         \PY{c+c1}{\PYZsh{} Make a list of calibration images}
+         \PY{n}{images} \PY{o}{=} \PY{n}{glob}\PY{o}{.}\PY{n}{glob}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{../camera\PYZus{}cal/calibration*.jpg}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{img}\PY{o}{=}\PY{n}{cv2}\PY{o}{.}\PY{n}{imread}\PY{p}{(}\PY{n}{images}\PY{p}{[}\PY{l+m+mi}{19}\PY{p}{]}\PY{p}{)}
+         \PY{n}{img}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{img}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{}\PYZsh{} Define the function for image unwarp}
+         \PY{k}{def} \PY{n+nf}{Unwarp\PYZus{}img}\PY{p}{(}\PY{n}{img}\PY{p}{,} \PY{n}{nx}\PY{p}{,} \PY{n}{ny}\PY{p}{)}\PY{p}{:}
+                 \PY{c+c1}{\PYZsh{} Find the chessboard corners}
+             \PY{n}{gray}\PY{o}{=}\PY{n}{cv2}\PY{o}{.}\PY{n}{cvtColor}\PY{p}{(}\PY{n}{img}\PY{p}{,} \PY{n}{cv2}\PY{o}{.}\PY{n}{COLOR\PYZus{}BGR2GRAY}\PY{p}{)}
+             \PY{n}{ret}\PY{p}{,} \PY{n}{corners}\PY{o}{=}\PY{n}{cv2}\PY{o}{.}\PY{n}{findChessboardCorners}\PY{p}{(}\PY{n}{gray}\PY{p}{,} \PY{p}{(}\PY{n}{nx}\PY{p}{,} \PY{n}{ny}\PY{p}{)}\PY{p}{,} \PY{k+kc}{None}\PY{p}{)}
+             \PY{k}{if} \PY{n}{ret} \PY{o}{==} \PY{k+kc}{True}\PY{p}{:}
+                 \PY{n}{objpoints}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{objp}\PY{p}{)}
+                 \PY{n}{imgpoints}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{corners}\PY{p}{)}
+                 \PY{n}{ret}\PY{p}{,} \PY{n}{mtx}\PY{p}{,} \PY{n}{dist}\PY{p}{,} \PY{n}{rvecs}\PY{p}{,} \PY{n}{tvecs} \PY{o}{=} \PY{n}{cv2}\PY{o}{.}\PY{n}{calibrateCamera}\PY{p}{(}\PY{n}{objpoints}\PY{p}{,} \PY{n}{imgpoints}\PY{p}{,} \PY{n}{gray}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{p}{:}\PY{p}{:}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{k+kc}{None}\PY{p}{,} \PY{k+kc}{None}\PY{p}{)}
+         
+                 \PY{n}{undist} \PY{o}{=} \PY{n}{cv2}\PY{o}{.}\PY{n}{undistort}\PY{p}{(}\PY{n}{img}\PY{p}{,} \PY{n}{mtx}\PY{p}{,} \PY{n}{dist}\PY{p}{,} \PY{k+kc}{None}\PY{p}{,} \PY{n}{mtx}\PY{p}{)}
+                 \PY{n}{offset}\PY{o}{=}\PY{l+m+mi}{100} 
+                 \PY{n}{img\PYZus{}size}\PY{o}{=}\PY{p}{(}\PY{n}{gray}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,}\PY{n}{gray}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+                 \PY{n}{src}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{float32}\PY{p}{(}\PY{p}{[}\PY{n}{corners}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{p}{:}\PY{p}{,}\PY{p}{:}\PY{p}{]}\PY{p}{,} \PY{n}{corners}\PY{p}{[}\PY{n}{nx}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,}\PY{p}{:}\PY{p}{,}\PY{p}{:}\PY{p}{]}\PY{p}{,}\PY{n}{corners}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,}\PY{p}{:}\PY{p}{,}\PY{p}{:}\PY{p}{]}\PY{p}{,}\PY{n}{corners}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{n}{nx}\PY{p}{,}\PY{p}{:}\PY{p}{,}\PY{p}{:}\PY{p}{]}\PY{p}{]}\PY{p}{)}
+                 \PY{n}{dst} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{float32}\PY{p}{(}\PY{p}{[}\PY{p}{[}\PY{n}{offset}\PY{p}{,} \PY{n}{offset}\PY{p}{]}\PY{p}{,} \PY{p}{[}\PY{n}{img\PYZus{}size}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{\PYZhy{}}\PY{n}{offset}\PY{p}{,} \PY{n}{offset}\PY{p}{]}\PY{p}{,} 
+                                              \PY{p}{[}\PY{n}{img\PYZus{}size}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{\PYZhy{}}\PY{n}{offset}\PY{p}{,} \PY{n}{img\PYZus{}size}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{\PYZhy{}}\PY{n}{offset}\PY{p}{]}\PY{p}{,} 
+                                              \PY{p}{[}\PY{n}{offset}\PY{p}{,} \PY{n}{img\PYZus{}size}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{\PYZhy{}}\PY{n}{offset}\PY{p}{]}\PY{p}{]}\PY{p}{)}
+                 \PY{c+c1}{\PYZsh{} Given src and dst points, calculate the perspective transform matrix}
+                 \PY{n}{M} \PY{o}{=} \PY{n}{cv2}\PY{o}{.}\PY{n}{getPerspectiveTransform}\PY{p}{(}\PY{n}{src}\PY{p}{,} \PY{n}{dst}\PY{p}{)}
+                 \PY{n}{Minv} \PY{o}{=} \PY{n}{cv2}\PY{o}{.}\PY{n}{getPerspectiveTransform}\PY{p}{(}\PY{n}{dst}\PY{p}{,} \PY{n}{src}\PY{p}{)}
+                 \PY{c+c1}{\PYZsh{} Warp the image using OpenCV warpPerspective()}
+                 \PY{n}{warped} \PY{o}{=} \PY{n}{cv2}\PY{o}{.}\PY{n}{warpPerspective}\PY{p}{(}\PY{n}{undist}\PY{p}{,} \PY{n}{M}\PY{p}{,} \PY{n}{img\PYZus{}size}\PY{p}{)}
+             \PY{k}{return} \PY{n}{warped}\PY{p}{,} \PY{n}{M}
+         
+         \PY{n}{warped\PYZus{}img}\PY{p}{,} \PY{n}{perspective\PYZus{}M}\PY{o}{=}\PY{n}{Unwarp\PYZus{}img}\PY{p}{(}\PY{n}{img}\PY{p}{,} \PY{n}{nx}\PY{p}{,} \PY{n}{ny}\PY{p}{)}
+         
+         \PY{n}{f}\PY{p}{,} \PY{p}{(}\PY{n}{ax1}\PY{p}{,} \PY{n}{ax2}\PY{p}{)} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{,} \PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{24}\PY{p}{,} \PY{l+m+mi}{9}\PY{p}{)}\PY{p}{)}
+         \PY{n}{f}\PY{o}{.}\PY{n}{tight\PYZus{}layout}\PY{p}{(}\PY{p}{)}
+         \PY{n}{ax1}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{img}\PY{p}{)}
+         \PY{n}{ax1}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Original Image}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{30}\PY{p}{)}
+         \PY{n}{ax2}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{warped\PYZus{}img}\PY{p}{)}
+         \PY{n}{ax2}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Undistorted and Warped Image}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{30}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{savefig}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Undistorted\PYZus{}Warped\PYZus{}Image.png}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_4_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \section{Pipeline for Lane detection on
+images}\label{pipeline-for-lane-detection-on-images}
+
+    \paragraph{Apply Camera calibration, distortion correction,
+color\&gradients threshold and perspective transforms to the raw testing
+images}\label{apply-camera-calibration-distortion-correction-colorgradients-threshold-and-perspective-transforms-to-the-raw-testing-images}
+
+In this section, all images can be undistorted by using camera
+calibration parameters, and define a user-defined function, in which
+camera parameters and all distortion coefficients are obtained for each
+of single image
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}55}]:} \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+         \PY{k+kn}{import} \PY{n+nn}{cv2}
+         \PY{k+kn}{import} \PY{n+nn}{glob}
+         \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+         \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline
+         \PY{c+c1}{\PYZsh{}\PYZsh{} Apply Camera calibration, distortion correction}
+         \PY{k}{def} \PY{n+nf}{camera\PYZus{}calibration}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+             \PY{n}{nx}\PY{o}{=}\PY{l+m+mi}{9}
+             \PY{n}{ny}\PY{o}{=}\PY{l+m+mi}{6}
+             \PY{n}{objp} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{n}{nx}\PY{o}{*}\PY{n}{ny}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{)}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{float32}\PY{p}{)}
+             \PY{n}{objp}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{p}{:}\PY{l+m+mi}{2}\PY{p}{]} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{mgrid}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{:}\PY{n}{nx}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{:}\PY{n}{ny}\PY{p}{]}\PY{o}{.}\PY{n}{T}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Arrays to store object points and image points from all the images.}
+             \PY{n}{objpoints} \PY{o}{=} \PY{p}{[}\PY{p}{]} \PY{c+c1}{\PYZsh{} 3d points in real world space}
+             \PY{n}{imgpoints} \PY{o}{=} \PY{p}{[}\PY{p}{]} \PY{c+c1}{\PYZsh{} 2d points in image plane.}
+         
+         \PY{c+c1}{\PYZsh{} Make a list of calibration images}
+             \PY{n}{images} \PY{o}{=} \PY{n}{glob}\PY{o}{.}\PY{n}{glob}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{../camera\PYZus{}cal/calibration*.jpg}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Step through the list and search for chessboard corners}
+             \PY{k}{for} \PY{n}{fname} \PY{o+ow}{in} \PY{n}{images}\PY{p}{:}
+                 \PY{n}{img\PYZus{}chess} \PY{o}{=} \PY{n}{cv2}\PY{o}{.}\PY{n}{imread}\PY{p}{(}\PY{n}{fname}\PY{p}{)}
+                 \PY{n}{gray\PYZus{}chess} \PY{o}{=} \PY{n}{cv2}\PY{o}{.}\PY{n}{cvtColor}\PY{p}{(}\PY{n}{img\PYZus{}chess}\PY{p}{,}\PY{n}{cv2}\PY{o}{.}\PY{n}{COLOR\PYZus{}BGR2GRAY}\PY{p}{)}
+         
+             \PY{c+c1}{\PYZsh{} Find the chessboard corners}
+                 \PY{n}{ret}\PY{p}{,} \PY{n}{corners} \PY{o}{=} \PY{n}{cv2}\PY{o}{.}\PY{n}{findChessboardCorners}\PY{p}{(}\PY{n}{gray\PYZus{}chess}\PY{p}{,} \PY{p}{(}\PY{l+m+mi}{9}\PY{p}{,}\PY{l+m+mi}{6}\PY{p}{)}\PY{p}{,}\PY{k+kc}{None}\PY{p}{)}
+             
+         
+             \PY{c+c1}{\PYZsh{} If found, add object points, image points}
+                 \PY{k}{if} \PY{n}{ret} \PY{o}{==} \PY{k+kc}{True}\PY{p}{:}
+                     \PY{n}{objpoints}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{objp}\PY{p}{)}
+                     \PY{n}{imgpoints}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{corners}\PY{p}{)}
+             \PY{n}{shape}\PY{o}{=}\PY{n}{gray\PYZus{}chess}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{p}{:}\PY{p}{:}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}
+             \PY{n}{np}\PY{o}{.}\PY{n}{save}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{objpoints}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{objpoints}\PY{p}{)}
+             \PY{n}{np}\PY{o}{.}\PY{n}{save}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{imgpoints}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{imgpoints}\PY{p}{)}
+             \PY{n}{np}\PY{o}{.}\PY{n}{save}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{shape}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{shape}\PY{p}{)}
+             
+             \PY{k}{return} \PY{k+kc}{None}
+         \PY{c+c1}{\PYZsh{}\PYZsh{} Apply Camera calibration, distortion correction}
+         \PY{k}{def} \PY{n+nf}{undistortion}\PY{p}{(}\PY{n}{img}\PY{p}{)}\PY{p}{:}
+         \PY{c+c1}{\PYZsh{} Arrays to store object points and image points from all the images.}
+             \PY{n}{objpoints} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{load}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{objpoints.npy}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} \PY{c+c1}{\PYZsh{} 3d points in real world space}
+             \PY{n}{imgpoints} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{load}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{imgpoints.npy}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} \PY{c+c1}{\PYZsh{} 2d points in image plane.}
+             \PY{n}{shape}\PY{o}{=}\PY{n+nb}{tuple}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{load}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{shape.npy}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}
+             \PY{n}{ret}\PY{p}{,} \PY{n}{mtx}\PY{p}{,} \PY{n}{dist}\PY{p}{,} \PY{n}{rvecs}\PY{p}{,} \PY{n}{tvecs} \PY{o}{=} \PY{n}{cv2}\PY{o}{.}\PY{n}{calibrateCamera}\PY{p}{(}\PY{n}{objpoints}\PY{p}{,} \PY{n}{imgpoints}\PY{p}{,}\PY{n}{shape}\PY{p}{,}\PY{k+kc}{None}\PY{p}{,} \PY{k+kc}{None}\PY{p}{)}
+             \PY{n}{undist}\PY{o}{=}\PY{n}{cv2}\PY{o}{.}\PY{n}{undistort}\PY{p}{(}\PY{n}{img}\PY{p}{,} \PY{n}{mtx}\PY{p}{,} \PY{n}{dist}\PY{p}{,} \PY{k+kc}{None}\PY{p}{,} \PY{n}{mtx}\PY{p}{)}
+             \PY{k}{return} \PY{n}{undist}  
+         
+         \PY{c+c1}{\PYZsh{} read an image from a folder}
+         \PY{c+c1}{\PYZsh{}img=mpimg.imread(\PYZsq{}solidYellowCurve2.jpg\PYZsq{})}
+         \PY{n}{img}\PY{o}{=}\PY{n}{cv2}\PY{o}{.}\PY{n}{imread}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{../test\PYZus{}images/test6.jpg}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{b}\PY{p}{,}\PY{n}{g}\PY{p}{,}\PY{n}{r}\PY{o}{=}\PY{n}{cv2}\PY{o}{.}\PY{n}{split}\PY{p}{(}\PY{n}{img}\PY{p}{)}
+         \PY{n}{img}\PY{o}{=}\PY{n}{cv2}\PY{o}{.}\PY{n}{merge}\PY{p}{(}\PY{p}{[}\PY{n}{r}\PY{p}{,}\PY{n}{g}\PY{p}{,}\PY{n}{b}\PY{p}{]}\PY{p}{)}
+         \PY{n}{original\PYZus{}img}\PY{o}{=}\PY{n}{img}
+         \PY{c+c1}{\PYZsh{} print out some info about this image}
+         \PY{c+c1}{\PYZsh{}img=cv2.cvtColor(img, cv2.COLOR\PYZus{}BGR2RGB)}
+         \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{This image is:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n+nb}{type}\PY{p}{(}\PY{n}{img}\PY{p}{)}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{with dimensions of}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{img}\PY{o}{.}\PY{n}{shape}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} transform from color to gray scale}
+         \PY{n}{img\PYZus{}gray}\PY{o}{=}\PY{n}{cv2}\PY{o}{.}\PY{n}{cvtColor}\PY{p}{(}\PY{n}{img}\PY{p}{,}\PY{n}{cv2}\PY{o}{.}\PY{n}{COLOR\PYZus{}RGB2GRAY}\PY{p}{)} \PY{c+c1}{\PYZsh{}mpimg loads image as RGB}
+         \PY{n}{dst}\PY{o}{=}\PY{n}{undistortion}\PY{p}{(}\PY{n}{img}\PY{p}{)}
+         \PY{n}{f}\PY{p}{,} \PY{p}{(}\PY{n}{ax1}\PY{p}{,} \PY{n}{ax2}\PY{p}{)}\PY{o}{=}\PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,} \PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{24}\PY{p}{,}\PY{l+m+mi}{9}\PY{p}{)}\PY{p}{)}
+         \PY{n}{f}\PY{o}{.}\PY{n}{tight\PYZus{}layout}\PY{p}{(}\PY{p}{)}
+         \PY{n}{ax1}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{img}\PY{p}{)}
+         \PY{n}{ax1}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Original Image}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{30}\PY{p}{)}
+         \PY{n}{ax2}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{dst}\PY{p}{)}
+         \PY{n}{ax2}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Undistorted Image}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{30}\PY{p}{)}
+           
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+This image is: <class 'numpy.ndarray'> with dimensions of (720, 1280, 3)
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}55}]:} Text(0.5,1,'Undistorted Image')
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_7_2.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \paragraph{Describe how (and identify where in your code) you used color
+transforms, gradients or other methods to create a thresholded binary
+image. Provide an example of a binary image
+result.}\label{describe-how-and-identify-where-in-your-code-you-used-color-transforms-gradients-or-other-methods-to-create-a-thresholded-binary-image.-provide-an-example-of-a-binary-image-result.}
+
+I used a combination of color and gradient thresholds to generate a
+binary image, Here's an example of my output for this step.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}56}]:} \PY{n}{thresh\PYZus{}grad\PYZus{}min} \PY{o}{=} \PY{l+m+mi}{20}
+         \PY{n}{thresh\PYZus{}grad\PYZus{}max} \PY{o}{=} \PY{l+m+mi}{100}
+         \PY{n}{color\PYZus{}thre\PYZus{}min}\PY{p}{,} \PY{n}{color\PYZus{}thre\PYZus{}max}\PY{o}{=}\PY{l+m+mi}{170}\PY{p}{,} \PY{l+m+mi}{255}
+         \PY{c+c1}{\PYZsh{}\PYZsh{} Define Color \PYZam{} gradients function}
+         \PY{k}{def} \PY{n+nf}{gradient\PYZus{}threshold}\PY{p}{(}\PY{n}{img}\PY{p}{,} \PY{n}{thresh\PYZus{}grad\PYZus{}min}\PY{p}{,} \PY{n}{thresh\PYZus{}grad\PYZus{}max}\PY{p}{,} \PY{n}{color\PYZus{}thre\PYZus{}min}\PY{p}{,} \PY{n}{color\PYZus{}thre\PYZus{}max}\PY{p}{)}\PY{p}{:}
+             \PY{n}{hls}\PY{o}{=}\PY{n}{cv2}\PY{o}{.}\PY{n}{cvtColor}\PY{p}{(}\PY{n}{img}\PY{p}{,} \PY{n}{cv2}\PY{o}{.}\PY{n}{COLOR\PYZus{}RGB2HLS}\PY{p}{)}
+             \PY{n}{s\PYZus{}channel}\PY{o}{=}\PY{n}{hls}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{]}
+             \PY{n}{gray}\PY{o}{=}\PY{n}{cv2}\PY{o}{.}\PY{n}{cvtColor}\PY{p}{(}\PY{n}{img}\PY{p}{,} \PY{n}{cv2}\PY{o}{.}\PY{n}{COLOR\PYZus{}RGB2GRAY}\PY{p}{)}
+             
+             \PY{c+c1}{\PYZsh{}\PYZsh{} Sobelx}
+             \PY{n}{sobelx} \PY{o}{=} \PY{n}{cv2}\PY{o}{.}\PY{n}{Sobel}\PY{p}{(}\PY{n}{gray}\PY{p}{,} \PY{n}{cv2}\PY{o}{.}\PY{n}{CV\PYZus{}64F}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{)} \PY{c+c1}{\PYZsh{} Take the derivative in x}
+             \PY{n}{abs\PYZus{}sobelx} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{absolute}\PY{p}{(}\PY{n}{sobelx}\PY{p}{)} \PY{c+c1}{\PYZsh{} Absolute x derivative to accentuate lines away from horizontal}
+             \PY{n}{scaled\PYZus{}sobel} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{uint8}\PY{p}{(}\PY{l+m+mi}{255}\PY{o}{*}\PY{n}{abs\PYZus{}sobelx}\PY{o}{/}\PY{n}{np}\PY{o}{.}\PY{n}{max}\PY{p}{(}\PY{n}{abs\PYZus{}sobelx}\PY{p}{)}\PY{p}{)}
+             \PY{c+c1}{\PYZsh{} Threshold x gradient}
+             \PY{n}{sxbinary} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros\PYZus{}like}\PY{p}{(}\PY{n}{scaled\PYZus{}sobel}\PY{p}{)}
+             \PY{n}{sxbinary}\PY{p}{[}\PY{p}{(}\PY{n}{scaled\PYZus{}sobel} \PY{o}{\PYZgt{}}\PY{o}{=} \PY{n}{thresh\PYZus{}grad\PYZus{}min}\PY{p}{)} \PY{o}{\PYZam{}} \PY{p}{(}\PY{n}{scaled\PYZus{}sobel} \PY{o}{\PYZlt{}}\PY{o}{=} \PY{n}{thresh\PYZus{}grad\PYZus{}max}\PY{p}{)}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{1}
+             
+             \PY{c+c1}{\PYZsh{} Color threshold}
+             \PY{n}{s\PYZus{}binary}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{zeros\PYZus{}like}\PY{p}{(}\PY{n}{s\PYZus{}channel}\PY{p}{)}
+             \PY{n}{s\PYZus{}binary}\PY{p}{[}\PY{p}{(}\PY{n}{s\PYZus{}channel}\PY{o}{\PYZgt{}}\PY{o}{=}\PY{n}{color\PYZus{}thre\PYZus{}min}\PY{p}{)}\PY{o}{\PYZam{}}\PY{p}{(}\PY{n}{s\PYZus{}channel}\PY{o}{\PYZlt{}}\PY{n}{color\PYZus{}thre\PYZus{}max}\PY{p}{)}\PY{p}{]}\PY{o}{=}\PY{l+m+mi}{1}
+             \PY{c+c1}{\PYZsh{} stack each channel to an image to see the contribution of individual channels}
+             \PY{n}{color\PYZus{}binary} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{dstack}\PY{p}{(}\PY{p}{(} \PY{n}{np}\PY{o}{.}\PY{n}{zeros\PYZus{}like}\PY{p}{(}\PY{n}{sxbinary}\PY{p}{)}\PY{p}{,} \PY{n}{sxbinary}\PY{p}{,} \PY{n}{s\PYZus{}binary}\PY{p}{)}\PY{p}{)} \PY{o}{*} \PY{l+m+mi}{255}
+             \PY{c+c1}{\PYZsh{} combine two binary thresholds}
+             \PY{n}{combined\PYZus{}binary}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{zeros\PYZus{}like}\PY{p}{(}\PY{n}{s\PYZus{}binary}\PY{p}{)}
+             \PY{n}{combined\PYZus{}binary}\PY{p}{[}\PY{p}{(}\PY{n}{sxbinary}\PY{o}{==}\PY{l+m+mi}{1}\PY{p}{)}\PY{o}{|}\PY{p}{(}\PY{n}{s\PYZus{}binary}\PY{o}{==}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{]}\PY{o}{=}\PY{l+m+mi}{1}
+             \PY{k}{return}  \PY{n}{combined\PYZus{}binary}
+         \PY{n}{out}\PY{o}{=}\PY{n}{gradient\PYZus{}threshold}\PY{p}{(}\PY{n}{img}\PY{p}{,} \PY{n}{thresh\PYZus{}grad\PYZus{}min}\PY{p}{,} \PY{n}{thresh\PYZus{}grad\PYZus{}max}\PY{p}{,} \PY{n}{color\PYZus{}thre\PYZus{}min}\PY{p}{,} \PY{n}{color\PYZus{}thre\PYZus{}max}\PY{p}{)}
+         
+         \PY{n}{f}\PY{p}{,} \PY{p}{(}\PY{n}{ax1}\PY{p}{,} \PY{n}{ax2}\PY{p}{)}\PY{o}{=}\PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,} \PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{24}\PY{p}{,}\PY{l+m+mi}{9}\PY{p}{)}\PY{p}{)}
+         \PY{n}{f}\PY{o}{.}\PY{n}{tight\PYZus{}layout}\PY{p}{(}\PY{p}{)}
+         \PY{n}{ax1}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{img}\PY{p}{)}
+         \PY{n}{ax1}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Original Image}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{30}\PY{p}{)}
+         \PY{n}{ax2}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{out}\PY{p}{,} \PY{n}{cmap}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{gray}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{ax2}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{gradient threshold}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{30}\PY{p}{)}
+           
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}56}]:} Text(0.5,1,'gradient threshold')
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_9_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \paragraph{Describe how (and identify where in your code) you performed
+a perspective transform and provide an example of a transformed
+image.}\label{describe-how-and-identify-where-in-your-code-you-performed-a-perspective-transform-and-provide-an-example-of-a-transformed-image.}
+
+The code for my perspective transform includes a function called
+\texttt{warped\_img()}, which appears in lines 1 through 15 in the
+IPython notebook block below. The \texttt{warped\_img()} function takes
+as inputs an image (\texttt{img}), as well as source (\texttt{src}) and
+destination (\texttt{dst}) points. I chose the hardcode the source and
+destination points in the following manner:
+
+\begin{longtable}[]{@{}cc@{}}
+\toprule
+Source & Destination\tabularnewline
+\midrule
+\endhead
+580, 460 & 200, 0\tabularnewline
+700, 460 & 1000, 0\tabularnewline
+1040, 680 & 1000,720\tabularnewline
+260, 680 & 200, 720\tabularnewline
+\bottomrule
+\end{longtable}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{src}\OperatorTok{=}\NormalTok{np.float32([[}\DecValTok{580}\NormalTok{,}\DecValTok{460}\NormalTok{],[}\DecValTok{700}\NormalTok{,}\DecValTok{460}\NormalTok{],[}\DecValTok{1040}\NormalTok{,}\DecValTok{680}\NormalTok{],[}\DecValTok{260}\NormalTok{,}\DecValTok{680}\NormalTok{]])}
+\NormalTok{dst }\OperatorTok{=}\NormalTok{ np.array([[}\DecValTok{200}\NormalTok{, }\DecValTok{0}\NormalTok{], [}\DecValTok{1000}\NormalTok{, }\DecValTok{0}\NormalTok{], [}\DecValTok{1000}\NormalTok{, img.shape[}\DecValTok{0}\NormalTok{]], [}\DecValTok{200}\NormalTok{, img.shape[}\DecValTok{0}\NormalTok{]]], np.float32)}
+\end{Highlighting}
+\end{Shaded}
+
+I verified that my perspective transform was working as expected by
+drawing the \texttt{src} and \texttt{dst} points onto a test image and
+its warped counterpart to verify that the lines appear parallel in the
+warped image.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}57}]:} \PY{c+c1}{\PYZsh{}\PYZsh{} Perspective transform}
+         \PY{c+c1}{\PYZsh{}\PYZsh{} Define the function for image unwarp}
+         \PY{k}{def} \PY{n+nf}{warped\PYZus{}img}\PY{p}{(}\PY{n}{img}\PY{p}{)}\PY{p}{:}
+             \PY{n}{gray}\PY{o}{=}\PY{n}{cv2}\PY{o}{.}\PY{n}{cvtColor}\PY{p}{(}\PY{n}{img}\PY{p}{,} \PY{n}{cv2}\PY{o}{.}\PY{n}{COLOR\PYZus{}RGB2GRAY}\PY{p}{)}
+             \PY{n}{img\PYZus{}size}\PY{o}{=}\PY{p}{(}\PY{n}{gray}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,}\PY{n}{gray}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+             \PY{c+c1}{\PYZsh{}src=np.float32([[500,500],[780,500],[img.shape[1],img.shape[0]],[150,img.shape[0]]])}
+             \PY{n}{src}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{float32}\PY{p}{(}\PY{p}{[}\PY{p}{[}\PY{l+m+mi}{580}\PY{p}{,}\PY{l+m+mi}{460}\PY{p}{]}\PY{p}{,}\PY{p}{[}\PY{l+m+mi}{700}\PY{p}{,}\PY{l+m+mi}{460}\PY{p}{]}\PY{p}{,}\PY{p}{[}\PY{l+m+mi}{1040}\PY{p}{,}\PY{l+m+mi}{680}\PY{p}{]}\PY{p}{,}\PY{p}{[}\PY{l+m+mi}{260}\PY{p}{,}\PY{l+m+mi}{680}\PY{p}{]}\PY{p}{]}\PY{p}{)}
+             \PY{n}{dst} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{p}{[}\PY{l+m+mi}{200}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{p}{[}\PY{l+m+mi}{1000}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{p}{[}\PY{l+m+mi}{1000}\PY{p}{,} \PY{n}{img}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{]}\PY{p}{,} \PY{p}{[}\PY{l+m+mi}{200}\PY{p}{,} \PY{n}{img}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{]}\PY{p}{]}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{float32}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{} Given src and dst points, calculate the perspective transform matrix}
+             \PY{n}{M} \PY{o}{=} \PY{n}{cv2}\PY{o}{.}\PY{n}{getPerspectiveTransform}\PY{p}{(}\PY{n}{src}\PY{p}{,} \PY{n}{dst}\PY{p}{)}
+             \PY{n}{Minv} \PY{o}{=} \PY{n}{cv2}\PY{o}{.}\PY{n}{getPerspectiveTransform}\PY{p}{(}\PY{n}{dst}\PY{p}{,} \PY{n}{src}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{} Warp the image using OpenCV warpPerspective()}
+             \PY{n}{warped} \PY{o}{=} \PY{n}{cv2}\PY{o}{.}\PY{n}{warpPerspective}\PY{p}{(}\PY{n}{img}\PY{p}{,} \PY{n}{M}\PY{p}{,} \PY{n}{img\PYZus{}size}\PY{p}{)}
+             \PY{k}{return} \PY{n}{warped}\PY{p}{,} \PY{n}{M}\PY{p}{,} \PY{n}{Minv}
+         \PY{n}{img\PYZus{}warped}\PY{p}{,} \PY{n}{M}\PY{p}{,} \PY{n}{Minv}\PY{o}{=}\PY{n}{warped\PYZus{}img}\PY{p}{(}\PY{n}{img}\PY{p}{)}
+         
+         \PY{n}{f}\PY{p}{,} \PY{p}{(}\PY{n}{ax1}\PY{p}{,} \PY{n}{ax2}\PY{p}{)}\PY{o}{=}\PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,} \PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{24}\PY{p}{,}\PY{l+m+mi}{9}\PY{p}{)}\PY{p}{)}
+         \PY{n}{f}\PY{o}{.}\PY{n}{tight\PYZus{}layout}\PY{p}{(}\PY{p}{)}
+         \PY{n}{ax1}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{img}\PY{p}{)}
+         \PY{n}{ax1}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Original Image}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{30}\PY{p}{)}
+         \PY{n}{ax2}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{img\PYZus{}warped}\PY{p}{)}
+         \PY{n}{ax2}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Warped image}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{30}\PY{p}{)}
+             
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}57}]:} Text(0.5,1,'Warped image')
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_11_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \paragraph{Describe how (and identify where in your code) you identified
+lane-line pixels and fit their positions with a
+polynomial?}\label{describe-how-and-identify-where-in-your-code-you-identified-lane-line-pixels-and-fit-their-positions-with-a-polynomial}
+
+I did this in the IPython notebook block below. As for curvature
+measurement, I took the average of left and right lane curvatures.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}58}]:} \PY{c+c1}{\PYZsh{}\PYZsh{} Define the function of detecting lane lines}
+         
+         \PY{k}{def} \PY{n+nf}{find\PYZus{}lines}\PY{p}{(}\PY{n}{binary}\PY{p}{)}\PY{p}{:}
+             \PY{c+c1}{\PYZsh{} calculate the current base leftx and rightx pixels location}
+             \PY{n}{image\PYZus{}height}\PY{o}{=}\PY{n}{binary}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+             \PY{n}{image\PYZus{}width}\PY{o}{=}\PY{n}{binary}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}
+             \PY{n}{histogram}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{binary}\PY{p}{[}\PY{n}{binary}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{/}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{:}\PY{p}{,}\PY{p}{:}\PY{p}{]}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+             \PY{n}{midpoint}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{int}\PY{p}{(}\PY{n}{binary}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{/}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{)}
+             \PY{n}{leftx\PYZus{}base}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{argmax}\PY{p}{(}\PY{n}{histogram}\PY{p}{[}\PY{p}{:}\PY{n}{midpoint}\PY{p}{]}\PY{p}{)}           \PY{c+c1}{\PYZsh{} define the base left lanes location}
+             \PY{n}{rightx\PYZus{}base}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{argmax}\PY{p}{(}\PY{n}{histogram}\PY{p}{[}\PY{n}{midpoint}\PY{p}{:}\PY{p}{]}\PY{p}{)}\PY{o}{+}\PY{n}{midpoint}  \PY{c+c1}{\PYZsh{} define the base right lanes location}
+             \PY{n}{leftx\PYZus{}current}\PY{o}{=}\PY{n}{leftx\PYZus{}base}
+             \PY{n}{rightx\PYZus{}current}\PY{o}{=}\PY{n}{rightx\PYZus{}base}
+             \PY{n}{out\PYZus{}img}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{dstack}\PY{p}{(}\PY{p}{(}\PY{n}{binary}\PY{p}{,} \PY{n}{binary}\PY{p}{,} \PY{n}{binary}\PY{p}{)}\PY{p}{)}
+             \PY{c+c1}{\PYZsh{} nonzero x \PYZam{} y locations}
+             \PY{n}{nonzerox}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{binary}\PY{o}{.}\PY{n}{nonzero}\PY{p}{(}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+             \PY{n}{nonzeroy}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{binary}\PY{o}{.}\PY{n}{nonzero}\PY{p}{(}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+             \PY{c+c1}{\PYZsh{} left and right lane lines indices}
+             \PY{n}{leftx\PYZus{}ind}\PY{p}{,} \PY{n}{rightx\PYZus{}ind}\PY{o}{=}\PY{p}{[}\PY{p}{]}\PY{p}{,}\PY{p}{[}\PY{p}{]}
+             \PY{c+c1}{\PYZsh{} Hyper parameters for windows}
+             \PY{n}{nwindow}\PY{o}{=}\PY{l+m+mi}{9}
+             \PY{n}{margin}\PY{o}{=}\PY{l+m+mi}{100}
+             \PY{n}{minpxl}\PY{o}{=}\PY{l+m+mi}{50}
+             
+             \PY{k}{for} \PY{n}{window} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{nwindow}\PY{p}{)}\PY{p}{:}
+                 \PY{c+c1}{\PYZsh{} define the parameters of windwos on image}
+                 \PY{n}{win\PYZus{}height}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{int}\PY{p}{(}\PY{n}{image\PYZus{}height}\PY{o}{/}\PY{o}{/}\PY{n}{nwindow}\PY{p}{)}
+                 \PY{n}{win\PYZus{}y\PYZus{}low}\PY{o}{=}\PY{n}{image\PYZus{}height}\PY{o}{\PYZhy{}}\PY{p}{(}\PY{n}{window}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}\PY{o}{*}\PY{n}{win\PYZus{}height}
+                 \PY{n}{win\PYZus{}y\PYZus{}high}\PY{o}{=}\PY{n}{image\PYZus{}height}\PY{o}{\PYZhy{}}\PY{n}{window}\PY{o}{*}\PY{n}{win\PYZus{}height}
+                 \PY{n}{win\PYZus{}left\PYZus{}low}\PY{o}{=}\PY{n}{leftx\PYZus{}current}\PY{o}{\PYZhy{}}\PY{n}{margin}
+                 \PY{n}{win\PYZus{}left\PYZus{}high}\PY{o}{=}\PY{n}{leftx\PYZus{}current}\PY{o}{+}\PY{n}{margin}
+                 \PY{n}{win\PYZus{}right\PYZus{}low}\PY{o}{=}\PY{n}{rightx\PYZus{}current}\PY{o}{\PYZhy{}}\PY{n}{margin}
+                 \PY{n}{win\PYZus{}right\PYZus{}high}\PY{o}{=}\PY{n}{rightx\PYZus{}current}\PY{o}{+}\PY{n}{margin}
+                 
+                 \PY{c+c1}{\PYZsh{} identify the nonzero pixels within the window}
+                 \PY{n}{detected\PYZus{}leftx\PYZus{}ind}\PY{o}{=}\PY{p}{(}\PY{p}{(}\PY{n}{nonzeroy} \PY{o}{\PYZgt{}}\PY{o}{=} \PY{n}{win\PYZus{}y\PYZus{}low}\PY{p}{)} \PY{o}{\PYZam{}} \PY{p}{(}\PY{n}{nonzeroy} \PY{o}{\PYZlt{}} \PY{n}{win\PYZus{}y\PYZus{}high}\PY{p}{)} \PY{o}{\PYZam{}} 
+                 \PY{p}{(}\PY{n}{nonzerox} \PY{o}{\PYZgt{}}\PY{o}{=} \PY{n}{win\PYZus{}left\PYZus{}low}\PY{p}{)} \PY{o}{\PYZam{}}  \PY{p}{(}\PY{n}{nonzerox} \PY{o}{\PYZlt{}} \PY{n}{win\PYZus{}left\PYZus{}high}\PY{p}{)}\PY{p}{)}\PY{o}{.}\PY{n}{nonzero}\PY{p}{(}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+                 
+                 \PY{n}{detected\PYZus{}rightx\PYZus{}ind}\PY{o}{=}\PY{p}{(}\PY{p}{(}\PY{n}{nonzeroy} \PY{o}{\PYZgt{}}\PY{o}{=} \PY{n}{win\PYZus{}y\PYZus{}low}\PY{p}{)} \PY{o}{\PYZam{}} \PY{p}{(}\PY{n}{nonzeroy} \PY{o}{\PYZlt{}} \PY{n}{win\PYZus{}y\PYZus{}high}\PY{p}{)} \PY{o}{\PYZam{}} 
+                 \PY{p}{(}\PY{n}{nonzerox} \PY{o}{\PYZgt{}}\PY{o}{=} \PY{n}{win\PYZus{}right\PYZus{}low}\PY{p}{)} \PY{o}{\PYZam{}}  \PY{p}{(}\PY{n}{nonzerox} \PY{o}{\PYZlt{}} \PY{n}{win\PYZus{}right\PYZus{}high}\PY{p}{)}\PY{p}{)}\PY{o}{.}\PY{n}{nonzero}\PY{p}{(}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+                 
+                 \PY{k}{if} \PY{n+nb}{len}\PY{p}{(}\PY{n}{detected\PYZus{}leftx\PYZus{}ind}\PY{p}{)}\PY{o}{\PYZgt{}}\PY{n}{minpxl}\PY{p}{:}
+                     \PY{n}{leftx\PYZus{}current}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{int}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{nonzerox}\PY{p}{[}\PY{n}{detected\PYZus{}leftx\PYZus{}ind}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+                 \PY{k}{if} \PY{n+nb}{len}\PY{p}{(}\PY{n}{detected\PYZus{}rightx\PYZus{}ind}\PY{p}{)}\PY{o}{\PYZgt{}}\PY{n}{minpxl}\PY{p}{:}
+                     \PY{n}{rightx\PYZus{}current}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{int}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{nonzerox}\PY{p}{[}\PY{n}{detected\PYZus{}rightx\PYZus{}ind}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+                 \PY{n}{leftx\PYZus{}ind}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{detected\PYZus{}leftx\PYZus{}ind}\PY{p}{)}
+                 \PY{n}{rightx\PYZus{}ind}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{detected\PYZus{}rightx\PYZus{}ind}\PY{p}{)}
+             \PY{k}{try}\PY{p}{:}
+                 \PY{n}{leftx\PYZus{}ind}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{concatenate}\PY{p}{(}\PY{n}{leftx\PYZus{}ind}\PY{p}{)}
+                 \PY{n}{rightx\PYZus{}ind}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{concatenate}\PY{p}{(}\PY{n}{rightx\PYZus{}ind}\PY{p}{)}
+             \PY{k}{except} \PY{n}{ValueErrors}\PY{p}{:}
+                 
+                 \PY{k}{pass}
+             
+             \PY{n}{leftx}\PY{o}{=}\PY{n}{nonzerox}\PY{p}{[}\PY{n}{leftx\PYZus{}ind}\PY{p}{]}
+             \PY{n}{rightx}\PY{o}{=}\PY{n}{nonzerox}\PY{p}{[}\PY{n}{rightx\PYZus{}ind}\PY{p}{]}
+             \PY{n}{lefty}\PY{o}{=}\PY{n}{nonzeroy}\PY{p}{[}\PY{n}{leftx\PYZus{}ind}\PY{p}{]}
+             \PY{n}{righty}\PY{o}{=}\PY{n}{nonzeroy}\PY{p}{[}\PY{n}{rightx\PYZus{}ind}\PY{p}{]}
+             
+             \PY{k}{return} \PY{n}{leftx}\PY{p}{,} \PY{n}{lefty}\PY{p}{,} \PY{n}{rightx}\PY{p}{,} \PY{n}{righty}\PY{p}{,} \PY{n}{out\PYZus{}img}
+         
+         \PY{c+c1}{\PYZsh{} define polynomial function of lane lines}
+         
+         \PY{k}{def} \PY{n+nf}{polynomial\PYZus{}fit}\PY{p}{(}\PY{n}{binary}\PY{p}{,} \PY{n}{Minv}\PY{p}{)}\PY{p}{:}
+             \PY{c+c1}{\PYZsh{} Find our lane pixels first}
+             \PY{n}{leftx}\PY{p}{,} \PY{n}{lefty}\PY{p}{,} \PY{n}{rightx}\PY{p}{,} \PY{n}{righty}\PY{p}{,} \PY{n}{out\PYZus{}img} \PY{o}{=} \PY{n}{find\PYZus{}lines}\PY{p}{(}\PY{n}{binary}\PY{p}{)}
+             \PY{c+c1}{\PYZsh{} Fit a second order polynomial to each using `np.polyfit`}
+             \PY{n}{left\PYZus{}fit} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{polyfit}\PY{p}{(}\PY{n}{lefty}\PY{p}{,} \PY{n}{leftx}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{)}
+             \PY{n}{right\PYZus{}fit} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{polyfit}\PY{p}{(}\PY{n}{righty}\PY{p}{,} \PY{n}{rightx}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{)}
+             \PY{c+c1}{\PYZsh{} Generate x and y values for plotting}
+             \PY{n}{ploty} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{linspace}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{binary}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{binary}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{p}{)}
+             \PY{k}{try}\PY{p}{:}
+                 \PY{n}{left\PYZus{}fitx} \PY{o}{=} \PY{n}{left\PYZus{}fit}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{*}\PY{n}{ploty}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2} \PY{o}{+} \PY{n}{left\PYZus{}fit}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{*}\PY{n}{ploty} \PY{o}{+} \PY{n}{left\PYZus{}fit}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}
+                 \PY{n}{right\PYZus{}fitx} \PY{o}{=} \PY{n}{right\PYZus{}fit}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{*}\PY{n}{ploty}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2} \PY{o}{+} \PY{n}{right\PYZus{}fit}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{*}\PY{n}{ploty} \PY{o}{+} \PY{n}{right\PYZus{}fit}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}
+             \PY{k}{except} \PY{n+ne}{TypeError}\PY{p}{:}
+                 \PY{c+c1}{\PYZsh{} Avoids an error if `left` and `right\PYZus{}fit` are still none or incorrect}
+                 \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{The function failed to fit a line!}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                 \PY{n}{left\PYZus{}fitx} \PY{o}{=} \PY{l+m+mi}{1}\PY{o}{*}\PY{n}{ploty}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2} \PY{o}{+} \PY{l+m+mi}{1}\PY{o}{*}\PY{n}{ploty}
+                 \PY{n}{right\PYZus{}fitx} \PY{o}{=} \PY{l+m+mi}{1}\PY{o}{*}\PY{n}{ploty}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2} \PY{o}{+} \PY{l+m+mi}{1}\PY{o}{*}\PY{n}{ploty}
+             
+             \PY{c+c1}{\PYZsh{} Create an image to draw the lines on}
+             \PY{n}{warp\PYZus{}zero} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros\PYZus{}like}\PY{p}{(}\PY{n}{binary}\PY{p}{)}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{uint8}\PY{p}{)}
+             \PY{n}{color\PYZus{}warp} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{dstack}\PY{p}{(}\PY{p}{(}\PY{n}{warp\PYZus{}zero}\PY{p}{,} \PY{n}{warp\PYZus{}zero}\PY{p}{,} \PY{n}{warp\PYZus{}zero}\PY{p}{)}\PY{p}{)}
+         
+             \PY{c+c1}{\PYZsh{} Recast the x and y points into usable format for cv2.fillPoly()}
+             \PY{n}{pts\PYZus{}left} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{n}{np}\PY{o}{.}\PY{n}{transpose}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{vstack}\PY{p}{(}\PY{p}{[}\PY{n}{left\PYZus{}fitx}\PY{p}{,} \PY{n}{ploty}\PY{p}{]}\PY{p}{)}\PY{p}{)}\PY{p}{]}\PY{p}{)}
+             \PY{n}{pts\PYZus{}right} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{n}{np}\PY{o}{.}\PY{n}{flipud}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{transpose}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{vstack}\PY{p}{(}\PY{p}{[}\PY{n}{right\PYZus{}fitx}\PY{p}{,} \PY{n}{ploty}\PY{p}{]}\PY{p}{)}\PY{p}{)}\PY{p}{)}\PY{p}{]}\PY{p}{)}
+             \PY{n}{pts} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{hstack}\PY{p}{(}\PY{p}{(}\PY{n}{pts\PYZus{}left}\PY{p}{,} \PY{n}{pts\PYZus{}right}\PY{p}{)}\PY{p}{)}
+         
+             \PY{c+c1}{\PYZsh{} Draw the lane onto the warped blank image}
+             \PY{n}{cv2}\PY{o}{.}\PY{n}{fillPoly}\PY{p}{(}\PY{n}{color\PYZus{}warp}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{int\PYZus{}}\PY{p}{(}\PY{p}{[}\PY{n}{pts}\PY{p}{]}\PY{p}{)}\PY{p}{,} \PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{255}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{)}\PY{p}{)}
+             \PY{c+c1}{\PYZsh{} Warp the blank back to original image space using inverse perspective matrix (Minv)}
+             \PY{n}{newwarp} \PY{o}{=} \PY{n}{cv2}\PY{o}{.}\PY{n}{warpPerspective}\PY{p}{(}\PY{n}{color\PYZus{}warp}\PY{p}{,} \PY{n}{Minv}\PY{p}{,} \PY{p}{(}\PY{n}{binary}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{binary}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{)} 
+             
+         
+             \PY{c+c1}{\PYZsh{}\PYZsh{} Visualization \PYZsh{}\PYZsh{}}
+             \PY{c+c1}{\PYZsh{} Colors in the left and right lane regions}
+             \PY{n}{out\PYZus{}img}\PY{p}{[}\PY{n}{lefty}\PY{p}{,} \PY{n}{leftx}\PY{p}{]} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{255}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}
+             \PY{n}{out\PYZus{}img}\PY{p}{[}\PY{n}{righty}\PY{p}{,} \PY{n}{rightx}\PY{p}{]} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{255}\PY{p}{]}
+         
+             \PY{c+c1}{\PYZsh{} Plots the left and right polynomials on the lane lines}
+             \PY{c+c1}{\PYZsh{}plt.plot(left\PYZus{}fitx, ploty, color=\PYZsq{}yellow\PYZsq{})}
+             \PY{c+c1}{\PYZsh{}plt.plot(right\PYZus{}fitx, ploty, color=\PYZsq{}yellow\PYZsq{})}
+             \PY{k}{return} \PY{n}{out\PYZus{}img}\PY{p}{,} \PY{n}{newwarp}
+         
+         \PY{k}{def} \PY{n+nf}{curvature\PYZus{}cal}\PY{p}{(}\PY{n}{binary}\PY{p}{)}\PY{p}{:}
+             \PY{c+c1}{\PYZsh{} Find our lane pixels first}
+             \PY{n}{leftx}\PY{p}{,} \PY{n}{lefty}\PY{p}{,} \PY{n}{rightx}\PY{p}{,} \PY{n}{righty}\PY{p}{,} \PY{n}{out\PYZus{}img} \PY{o}{=} \PY{n}{find\PYZus{}lines}\PY{p}{(}\PY{n}{binary}\PY{p}{)}
+             \PY{c+c1}{\PYZsh{} covert x, y from pixels to meters}
+             \PY{n}{ym\PYZus{}per\PYZus{}pix} \PY{o}{=} \PY{l+m+mi}{30}\PY{o}{/}\PY{l+m+mi}{720} \PY{c+c1}{\PYZsh{} meters per pixel in y dimension}
+             \PY{n}{xm\PYZus{}per\PYZus{}pix} \PY{o}{=} \PY{l+m+mf}{3.7}\PY{o}{/}\PY{l+m+mi}{700} \PY{c+c1}{\PYZsh{} meters per pixel in x dimension}
+             
+             \PY{n}{image\PYZus{}height}\PY{o}{=}\PY{n}{binary}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+             \PY{n}{image\PYZus{}width}\PY{o}{=}\PY{n}{binary}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}
+             \PY{n}{histogram}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{binary}\PY{p}{[}\PY{n}{binary}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{/}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{:}\PY{p}{,}\PY{p}{:}\PY{p}{]}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+             \PY{n}{midpoint}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{int}\PY{p}{(}\PY{n}{binary}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{/}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{)}
+             \PY{n}{leftx\PYZus{}base}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{argmax}\PY{p}{(}\PY{n}{histogram}\PY{p}{[}\PY{p}{:}\PY{n}{midpoint}\PY{p}{]}\PY{p}{)}           \PY{c+c1}{\PYZsh{} define the base left lanes location}
+             \PY{n}{rightx\PYZus{}base}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{argmax}\PY{p}{(}\PY{n}{histogram}\PY{p}{[}\PY{n}{midpoint}\PY{p}{:}\PY{p}{]}\PY{p}{)}\PY{o}{+}\PY{n}{midpoint}  \PY{c+c1}{\PYZsh{} define the base right lanes location}
+             \PY{n}{lane\PYZus{}center}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{int}\PY{p}{(}\PY{p}{(}\PY{n}{leftx\PYZus{}base}\PY{o}{+}\PY{n}{rightx\PYZus{}base}\PY{p}{)}\PY{o}{/}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{)}
+             \PY{n}{img\PYZus{}center}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{int}\PY{p}{(}\PY{n}{image\PYZus{}width}\PY{o}{/}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{)}
+             \PY{n}{Veh\PYZus{}pos}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{float32}\PY{p}{(}\PY{p}{(}\PY{n}{img\PYZus{}center}\PY{o}{\PYZhy{}}\PY{n}{lane\PYZus{}center}\PY{p}{)}\PY{o}{*}\PY{n}{xm\PYZus{}per\PYZus{}pix}\PY{p}{)}  \PY{c+c1}{\PYZsh{} calculate the vehicel position, left \PYZsq{}\PYZhy{}\PYZsq{}, right off center \PYZsq{}+\PYZsq{}}
+             
+             \PY{c+c1}{\PYZsh{} Fit a second order polynomial to each using `np.polyfit`}
+             \PY{n}{left\PYZus{}fit\PYZus{}cr} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{polyfit}\PY{p}{(}\PY{n}{lefty}\PY{o}{*}\PY{n}{ym\PYZus{}per\PYZus{}pix}\PY{p}{,} \PY{n}{leftx}\PY{o}{*}\PY{n}{xm\PYZus{}per\PYZus{}pix}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{)}
+             \PY{n}{right\PYZus{}fit\PYZus{}cr} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{polyfit}\PY{p}{(}\PY{n}{righty}\PY{o}{*}\PY{n}{ym\PYZus{}per\PYZus{}pix}\PY{p}{,} \PY{n}{rightx}\PY{o}{*}\PY{n}{xm\PYZus{}per\PYZus{}pix}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{)}
+         
+             \PY{c+c1}{\PYZsh{} Generate x and y values for plotting}
+             \PY{n}{ploty} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{linspace}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{binary}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{binary}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{p}{)}
+             \PY{n}{y\PYZus{}eval}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{max}\PY{p}{(}\PY{n}{ploty}\PY{p}{)}
+             \PY{n}{left\PYZus{}curverad} \PY{o}{=} \PY{p}{(}\PY{p}{(}\PY{l+m+mi}{1} \PY{o}{+} \PY{p}{(}\PY{l+m+mi}{2}\PY{o}{*}\PY{n}{left\PYZus{}fit\PYZus{}cr}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{*}\PY{n}{y\PYZus{}eval}\PY{o}{*}\PY{n}{ym\PYZus{}per\PYZus{}pix} \PY{o}{+} \PY{n}{left\PYZus{}fit\PYZus{}cr}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{l+m+mf}{1.5}\PY{p}{)} \PY{o}{/} \PY{n}{np}\PY{o}{.}\PY{n}{absolute}\PY{p}{(}\PY{l+m+mi}{2}\PY{o}{*}\PY{n}{left\PYZus{}fit\PYZus{}cr}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+             \PY{n}{right\PYZus{}curverad} \PY{o}{=} \PY{p}{(}\PY{p}{(}\PY{l+m+mi}{1} \PY{o}{+} \PY{p}{(}\PY{l+m+mi}{2}\PY{o}{*}\PY{n}{right\PYZus{}fit\PYZus{}cr}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{*}\PY{n}{y\PYZus{}eval}\PY{o}{*}\PY{n}{ym\PYZus{}per\PYZus{}pix} \PY{o}{+} \PY{n}{right\PYZus{}fit\PYZus{}cr}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{l+m+mf}{1.5}\PY{p}{)} \PY{o}{/} \PY{n}{np}\PY{o}{.}\PY{n}{absolute}\PY{p}{(}\PY{l+m+mi}{2}\PY{o}{*}\PY{n}{right\PYZus{}fit\PYZus{}cr}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+             \PY{n}{lane\PYZus{}curverad}\PY{o}{=}\PY{p}{(}\PY{n}{left\PYZus{}curverad}\PY{o}{+}\PY{n}{right\PYZus{}curverad}\PY{p}{)}\PY{o}{/}\PY{l+m+mi}{2}
+         
+             \PY{k}{return} \PY{n}{lane\PYZus{}curverad}\PY{p}{,} \PY{n}{Veh\PYZus{}pos}
+         
+         \PY{n}{warped\PYZus{}binary}\PY{o}{=}\PY{n}{gradient\PYZus{}threshold}\PY{p}{(}\PY{n}{img\PYZus{}warped}\PY{p}{,} \PY{n}{thresh\PYZus{}grad\PYZus{}min}\PY{p}{,} \PY{n}{thresh\PYZus{}grad\PYZus{}max}\PY{p}{,} \PY{n}{color\PYZus{}thre\PYZus{}min}\PY{p}{,} \PY{n}{color\PYZus{}thre\PYZus{}max}\PY{p}{)}
+         
+         \PY{n}{f}\PY{p}{,} \PY{p}{(}\PY{n}{ax1}\PY{p}{,} \PY{n}{ax2}\PY{p}{)}\PY{o}{=}\PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,} \PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{24}\PY{p}{,}\PY{l+m+mi}{9}\PY{p}{)}\PY{p}{)}
+         \PY{n}{f}\PY{o}{.}\PY{n}{tight\PYZus{}layout}\PY{p}{(}\PY{p}{)}
+         \PY{n}{ax1}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{img\PYZus{}warped}\PY{p}{)}
+         \PY{n}{ax1}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Warped Image}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{30}\PY{p}{)}
+         \PY{n}{ax2}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{warped\PYZus{}binary}\PY{p}{,} \PY{n}{cmap}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{gray}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{ax2}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{warped binary}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{30}\PY{p}{)}
+         
+             
+             
+             
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}58}]:} Text(0.5,1,'warped binary')
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_13_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}59}]:} \PY{k}{def} \PY{n+nf}{process\PYZus{}image}\PY{p}{(}\PY{n}{img}\PY{p}{)}\PY{p}{:}
+             \PY{c+c1}{\PYZsh{} print out some info about this image}
+             \PY{c+c1}{\PYZsh{}img=cv2.cvtColor(img, cv2.COLOR\PYZus{}BGR2RGB)}
+             \PY{c+c1}{\PYZsh{} transform from color to gray scale}
+             \PY{c+c1}{\PYZsh{}b,g,r=cv2.split(img)}
+             \PY{c+c1}{\PYZsh{}img=cv2.merge([r,g,b])}
+             \PY{n}{img\PYZus{}gray}\PY{o}{=}\PY{n}{cv2}\PY{o}{.}\PY{n}{cvtColor}\PY{p}{(}\PY{n}{img}\PY{p}{,}\PY{n}{cv2}\PY{o}{.}\PY{n}{COLOR\PYZus{}RGB2GRAY}\PY{p}{)} \PY{c+c1}{\PYZsh{}mpimg loads image as RGB}
+             \PY{c+c1}{\PYZsh{} Apply Gaussian smoothing }
+             \PY{c+c1}{\PYZsh{}kernel\PYZus{}size=5}
+             \PY{c+c1}{\PYZsh{}blur\PYZus{}gray=cv2.GaussianBlur(img\PYZus{}gray,(kernel\PYZus{}size,kernel\PYZus{}size),0,0)}
+             \PY{c+c1}{\PYZsh{} Undistort the image}
+         
+             \PY{n}{undistort\PYZus{}img}\PY{o}{=}\PY{n}{undistortion}\PY{p}{(}\PY{n}{img}\PY{p}{)}
+             \PY{c+c1}{\PYZsh{}color \PYZam{} gradients threshold}
+             \PY{n}{img\PYZus{}warped}\PY{p}{,} \PY{n}{perspective\PYZus{}M}\PY{p}{,} \PY{n}{Minv}\PY{o}{=}\PY{n}{warped\PYZus{}img}\PY{p}{(}\PY{n}{undistort\PYZus{}img}\PY{p}{)}
+             \PY{n}{warped\PYZus{}binary}\PY{o}{=}\PY{n}{gradient\PYZus{}threshold}\PY{p}{(}\PY{n}{img\PYZus{}warped}\PY{p}{,} \PY{n}{thresh\PYZus{}grad\PYZus{}min}\PY{p}{,} \PY{n}{thresh\PYZus{}grad\PYZus{}max}\PY{p}{,} \PY{n}{color\PYZus{}thre\PYZus{}min}\PY{p}{,} \PY{n}{color\PYZus{}thre\PYZus{}max}\PY{p}{)}
+         
+             \PY{n}{out\PYZus{}img}\PY{p}{,} \PY{n}{newwarp}\PY{o}{=}\PY{n}{polynomial\PYZus{}fit}\PY{p}{(}\PY{n}{warped\PYZus{}binary}\PY{p}{,}\PY{n}{Minv}\PY{p}{)}
+             \PY{n}{lane\PYZus{}curverad}\PY{p}{,} \PY{n}{Veh\PYZus{}pos}\PY{o}{=}\PY{n}{curvature\PYZus{}cal}\PY{p}{(}\PY{n}{warped\PYZus{}binary}\PY{p}{)}
+             \PY{c+c1}{\PYZsh{} Combine the result with the original image}
+             \PY{n}{result} \PY{o}{=} \PY{n}{cv2}\PY{o}{.}\PY{n}{addWeighted}\PY{p}{(}\PY{n}{undistort\PYZus{}img}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{n}{newwarp}\PY{p}{,} \PY{l+m+mf}{0.3}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{)}
+             \PY{k}{if} \PY{n}{Veh\PYZus{}pos} \PY{o}{\PYZgt{}} \PY{l+m+mi}{0}\PY{p}{:}
+                 \PY{n}{car\PYZus{}pos\PYZus{}text} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+si}{\PYZob{}:04.2f\PYZcb{}}\PY{l+s+s2}{m right off center}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{Veh\PYZus{}pos}\PY{p}{)}
+             \PY{k}{else}\PY{p}{:}
+                 \PY{n}{car\PYZus{}pos\PYZus{}text} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+si}{\PYZob{}:04.3f\PYZcb{}}\PY{l+s+s1}{m left off center}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n+nb}{abs}\PY{p}{(}\PY{n}{Veh\PYZus{}pos}\PY{p}{)}\PY{p}{)}
+         
+             \PY{n}{cv2}\PY{o}{.}\PY{n}{putText}\PY{p}{(}\PY{n}{result}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Lane curve: }\PY{l+s+si}{\PYZob{}:04.2f\PYZcb{}}\PY{l+s+s2}{m}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{lane\PYZus{}curverad}\PY{p}{)}\PY{p}{,} \PY{p}{(}\PY{l+m+mi}{10}\PY{p}{,} \PY{l+m+mi}{50}\PY{p}{)}\PY{p}{,} \PY{n}{cv2}\PY{o}{.}\PY{n}{FONT\PYZus{}HERSHEY\PYZus{}SIMPLEX}\PY{p}{,} \PY{l+m+mf}{1.5}\PY{p}{,}
+                         \PY{n}{color}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{255}\PY{p}{,} \PY{l+m+mi}{255}\PY{p}{,} \PY{l+m+mi}{255}\PY{p}{)}\PY{p}{,} \PY{n}{thickness}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{)}
+             \PY{n}{cv2}\PY{o}{.}\PY{n}{putText}\PY{p}{(}\PY{n}{result}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Car is }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{car\PYZus{}pos\PYZus{}text}\PY{p}{)}\PY{p}{,} \PY{p}{(}\PY{l+m+mi}{10}\PY{p}{,} \PY{l+m+mi}{100}\PY{p}{)}\PY{p}{,} \PY{n}{cv2}\PY{o}{.}\PY{n}{FONT\PYZus{}HERSHEY\PYZus{}SIMPLEX}\PY{p}{,} \PY{l+m+mf}{1.5}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{255}\PY{p}{,} \PY{l+m+mi}{255}\PY{p}{,} \PY{l+m+mi}{255}\PY{p}{)}\PY{p}{,}
+                         \PY{n}{thickness}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{)}
+         
+             \PY{k}{return} \PY{n}{result}
+         
+         
+         \PY{n}{det\PYZus{}img}\PY{o}{=}\PY{n}{process\PYZus{}image}\PY{p}{(}\PY{n}{original\PYZus{}img}\PY{p}{)}
+         
+         \PY{n}{f}\PY{p}{,} \PY{p}{(}\PY{n}{ax1}\PY{p}{,} \PY{n}{ax2}\PY{p}{)}\PY{o}{=}\PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,} \PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{24}\PY{p}{,}\PY{l+m+mi}{9}\PY{p}{)}\PY{p}{)}
+         \PY{n}{f}\PY{o}{.}\PY{n}{tight\PYZus{}layout}\PY{p}{(}\PY{p}{)}
+         \PY{n}{ax1}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{img}\PY{p}{)}
+         \PY{n}{ax1}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Original Image}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{30}\PY{p}{)}
+         \PY{n}{ax2}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{det\PYZus{}img}\PY{p}{)}
+         \PY{n}{ax2}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Detected Lane lines}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{30}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{savefig}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{../output\PYZus{}images/test6}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_14_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subsection{Pipeline (Video)}\label{pipeline-video}
+
+\paragraph{1. Provide a link to your final video output. Your pipeline
+should perform reasonably well on the entire project video (wobbly lines
+are ok but no catastrophic failures that would cause the car to drive
+off the
+road!).}\label{provide-a-link-to-your-final-video-output.-your-pipeline-should-perform-reasonably-well-on-the-entire-project-video-wobbly-lines-are-ok-but-no-catastrophic-failures-that-would-cause-the-car-to-drive-off-the-road.}
+
+Here's a \href{./project_video.mp4}{https://youtu.be/tJ2cSO0wDSM}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+c1}{\PYZsh{} importing some useful packages}
+        \PY{c+c1}{\PYZsh{}from moviepy.editor import VideoFileClip}
+        \PY{k+kn}{import} \PY{n+nn}{imageio}
+        \PY{n}{imageio}\PY{o}{.}\PY{n}{plugins}\PY{o}{.}\PY{n}{ffmpeg}\PY{o}{.}\PY{n}{download}\PY{p}{(}\PY{p}{)}
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+        \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{image} \PY{k}{as} \PY{n+nn}{mpimg}
+        \PY{k+kn}{import} \PY{n+nn}{cv2}
+        \PY{k+kn}{import} \PY{n+nn}{os}
+        \PY{k+kn}{from} \PY{n+nn}{moviepy}\PY{n+nn}{.}\PY{n+nn}{editor} \PY{k}{import} \PY{n}{VideoFileClip}
+        \PY{k+kn}{import} \PY{n+nn}{glob}
+        
+        \PY{c+c1}{\PYZsh{}\PYZsh{} Apply Camera calibration, distortion correction}
+        \PY{k}{def} \PY{n+nf}{undistortion}\PY{p}{(}\PY{n}{img}\PY{p}{)}\PY{p}{:}
+        \PY{c+c1}{\PYZsh{} Arrays to store object points and image points from all the images.}
+            \PY{n}{objpoints} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{load}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{objpoints.npy}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} \PY{c+c1}{\PYZsh{} 3d points in real world space}
+            \PY{n}{imgpoints} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{load}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{imgpoints.npy}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} \PY{c+c1}{\PYZsh{} 2d points in image plane.}
+            \PY{n}{shape}\PY{o}{=}\PY{n+nb}{tuple}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{load}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{shape.npy}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}
+            \PY{n}{ret}\PY{p}{,} \PY{n}{mtx}\PY{p}{,} \PY{n}{dist}\PY{p}{,} \PY{n}{rvecs}\PY{p}{,} \PY{n}{tvecs} \PY{o}{=} \PY{n}{cv2}\PY{o}{.}\PY{n}{calibrateCamera}\PY{p}{(}\PY{n}{objpoints}\PY{p}{,} \PY{n}{imgpoints}\PY{p}{,}\PY{n}{shape}\PY{p}{,}\PY{k+kc}{None}\PY{p}{,} \PY{k+kc}{None}\PY{p}{)}
+            \PY{n}{undist}\PY{o}{=}\PY{n}{cv2}\PY{o}{.}\PY{n}{undistort}\PY{p}{(}\PY{n}{img}\PY{p}{,} \PY{n}{mtx}\PY{p}{,} \PY{n}{dist}\PY{p}{,} \PY{k+kc}{None}\PY{p}{,} \PY{n}{mtx}\PY{p}{)}
+            \PY{k}{return} \PY{n}{undist}
+        
+        \PY{n}{thresh\PYZus{}grad\PYZus{}min} \PY{o}{=} \PY{l+m+mi}{20}
+        \PY{n}{thresh\PYZus{}grad\PYZus{}max} \PY{o}{=} \PY{l+m+mi}{100}
+        \PY{n}{color\PYZus{}thre\PYZus{}min}\PY{p}{,} \PY{n}{color\PYZus{}thre\PYZus{}max}\PY{o}{=}\PY{l+m+mi}{170}\PY{p}{,} \PY{l+m+mi}{255}
+        \PY{c+c1}{\PYZsh{}\PYZsh{} Define Color \PYZam{} gradients function}
+        \PY{k}{def} \PY{n+nf}{gradient\PYZus{}threshold}\PY{p}{(}\PY{n}{img}\PY{p}{,} \PY{n}{thresh\PYZus{}grad\PYZus{}min}\PY{p}{,} \PY{n}{thresh\PYZus{}grad\PYZus{}max}\PY{p}{,} \PY{n}{color\PYZus{}thre\PYZus{}min}\PY{p}{,} \PY{n}{color\PYZus{}thre\PYZus{}max}\PY{p}{)}\PY{p}{:}
+            \PY{n}{hls}\PY{o}{=}\PY{n}{cv2}\PY{o}{.}\PY{n}{cvtColor}\PY{p}{(}\PY{n}{img}\PY{p}{,} \PY{n}{cv2}\PY{o}{.}\PY{n}{COLOR\PYZus{}RGB2HLS}\PY{p}{)}
+            \PY{n}{s\PYZus{}channel}\PY{o}{=}\PY{n}{hls}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{]}
+            \PY{n}{gray}\PY{o}{=}\PY{n}{cv2}\PY{o}{.}\PY{n}{cvtColor}\PY{p}{(}\PY{n}{img}\PY{p}{,} \PY{n}{cv2}\PY{o}{.}\PY{n}{COLOR\PYZus{}RGB2GRAY}\PY{p}{)}
+            
+            \PY{c+c1}{\PYZsh{}\PYZsh{} Sobelx}
+            \PY{n}{sobelx} \PY{o}{=} \PY{n}{cv2}\PY{o}{.}\PY{n}{Sobel}\PY{p}{(}\PY{n}{gray}\PY{p}{,} \PY{n}{cv2}\PY{o}{.}\PY{n}{CV\PYZus{}64F}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{)} \PY{c+c1}{\PYZsh{} Take the derivative in x}
+            \PY{n}{abs\PYZus{}sobelx} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{absolute}\PY{p}{(}\PY{n}{sobelx}\PY{p}{)} \PY{c+c1}{\PYZsh{} Absolute x derivative to accentuate lines away from horizontal}
+            \PY{n}{scaled\PYZus{}sobel} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{uint8}\PY{p}{(}\PY{l+m+mi}{255}\PY{o}{*}\PY{n}{abs\PYZus{}sobelx}\PY{o}{/}\PY{n}{np}\PY{o}{.}\PY{n}{max}\PY{p}{(}\PY{n}{abs\PYZus{}sobelx}\PY{p}{)}\PY{p}{)}
+            \PY{c+c1}{\PYZsh{} Threshold x gradient}
+            \PY{n}{sxbinary} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros\PYZus{}like}\PY{p}{(}\PY{n}{scaled\PYZus{}sobel}\PY{p}{)}
+            \PY{n}{sxbinary}\PY{p}{[}\PY{p}{(}\PY{n}{scaled\PYZus{}sobel} \PY{o}{\PYZgt{}}\PY{o}{=} \PY{n}{thresh\PYZus{}grad\PYZus{}min}\PY{p}{)} \PY{o}{\PYZam{}} \PY{p}{(}\PY{n}{scaled\PYZus{}sobel} \PY{o}{\PYZlt{}}\PY{o}{=} \PY{n}{thresh\PYZus{}grad\PYZus{}max}\PY{p}{)}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{1}
+            
+            \PY{c+c1}{\PYZsh{} Color threshold}
+            \PY{n}{s\PYZus{}binary}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{zeros\PYZus{}like}\PY{p}{(}\PY{n}{s\PYZus{}channel}\PY{p}{)}
+            \PY{n}{s\PYZus{}binary}\PY{p}{[}\PY{p}{(}\PY{n}{s\PYZus{}channel}\PY{o}{\PYZgt{}}\PY{o}{=}\PY{n}{color\PYZus{}thre\PYZus{}min}\PY{p}{)}\PY{o}{\PYZam{}}\PY{p}{(}\PY{n}{s\PYZus{}channel}\PY{o}{\PYZlt{}}\PY{n}{color\PYZus{}thre\PYZus{}max}\PY{p}{)}\PY{p}{]}\PY{o}{=}\PY{l+m+mi}{1}
+            \PY{c+c1}{\PYZsh{} stack each channel to an image to see the contribution of individual channels}
+            \PY{n}{color\PYZus{}binary} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{dstack}\PY{p}{(}\PY{p}{(} \PY{n}{np}\PY{o}{.}\PY{n}{zeros\PYZus{}like}\PY{p}{(}\PY{n}{sxbinary}\PY{p}{)}\PY{p}{,} \PY{n}{sxbinary}\PY{p}{,} \PY{n}{s\PYZus{}binary}\PY{p}{)}\PY{p}{)} \PY{o}{*} \PY{l+m+mi}{255}
+            \PY{c+c1}{\PYZsh{} combine two binary thresholds}
+            \PY{n}{combined\PYZus{}binary}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{zeros\PYZus{}like}\PY{p}{(}\PY{n}{s\PYZus{}binary}\PY{p}{)}
+            \PY{n}{combined\PYZus{}binary}\PY{p}{[}\PY{p}{(}\PY{n}{sxbinary}\PY{o}{==}\PY{l+m+mi}{1}\PY{p}{)}\PY{o}{|}\PY{p}{(}\PY{n}{s\PYZus{}binary}\PY{o}{==}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{]}\PY{o}{=}\PY{l+m+mi}{1}
+            \PY{k}{return}  \PY{n}{combined\PYZus{}binary}
+        
+        \PY{c+c1}{\PYZsh{}\PYZsh{} Perspective transform}
+        \PY{c+c1}{\PYZsh{}\PYZsh{} Define the function for image unwarp}
+        \PY{k}{def} \PY{n+nf}{warped\PYZus{}img}\PY{p}{(}\PY{n}{img}\PY{p}{)}\PY{p}{:}
+            \PY{n}{gray}\PY{o}{=}\PY{n}{cv2}\PY{o}{.}\PY{n}{cvtColor}\PY{p}{(}\PY{n}{img}\PY{p}{,} \PY{n}{cv2}\PY{o}{.}\PY{n}{COLOR\PYZus{}RGB2GRAY}\PY{p}{)}
+            \PY{n}{img\PYZus{}size}\PY{o}{=}\PY{p}{(}\PY{n}{gray}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,}\PY{n}{gray}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+            \PY{c+c1}{\PYZsh{}src=np.float32([[500,500],[780,500],[img.shape[1],img.shape[0]],[150,img.shape[0]]])}
+            \PY{n}{src}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{float32}\PY{p}{(}\PY{p}{[}\PY{p}{[}\PY{l+m+mi}{580}\PY{p}{,}\PY{l+m+mi}{460}\PY{p}{]}\PY{p}{,}\PY{p}{[}\PY{l+m+mi}{700}\PY{p}{,}\PY{l+m+mi}{460}\PY{p}{]}\PY{p}{,}\PY{p}{[}\PY{l+m+mi}{1040}\PY{p}{,}\PY{l+m+mi}{680}\PY{p}{]}\PY{p}{,}\PY{p}{[}\PY{l+m+mi}{260}\PY{p}{,}\PY{l+m+mi}{680}\PY{p}{]}\PY{p}{]}\PY{p}{)}
+            \PY{n}{dst} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{p}{[}\PY{l+m+mi}{200}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{p}{[}\PY{l+m+mi}{1000}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{p}{[}\PY{l+m+mi}{1000}\PY{p}{,} \PY{n}{img}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{]}\PY{p}{,} \PY{p}{[}\PY{l+m+mi}{200}\PY{p}{,} \PY{n}{img}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{]}\PY{p}{]}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{float32}\PY{p}{)}
+        \PY{c+c1}{\PYZsh{} Given src and dst points, calculate the perspective transform matrix}
+            \PY{n}{M} \PY{o}{=} \PY{n}{cv2}\PY{o}{.}\PY{n}{getPerspectiveTransform}\PY{p}{(}\PY{n}{src}\PY{p}{,} \PY{n}{dst}\PY{p}{)}
+            \PY{n}{Minv} \PY{o}{=} \PY{n}{cv2}\PY{o}{.}\PY{n}{getPerspectiveTransform}\PY{p}{(}\PY{n}{dst}\PY{p}{,} \PY{n}{src}\PY{p}{)}
+        \PY{c+c1}{\PYZsh{} Warp the image using OpenCV warpPerspective()}
+            \PY{n}{warped} \PY{o}{=} \PY{n}{cv2}\PY{o}{.}\PY{n}{warpPerspective}\PY{p}{(}\PY{n}{img}\PY{p}{,} \PY{n}{M}\PY{p}{,} \PY{n}{img\PYZus{}size}\PY{p}{)}
+            \PY{k}{return} \PY{n}{warped}\PY{p}{,} \PY{n}{M}\PY{p}{,} \PY{n}{Minv}
+        
+        \PY{c+c1}{\PYZsh{}\PYZsh{} Define the function of detecting lane lines}
+        
+        \PY{k}{def} \PY{n+nf}{find\PYZus{}lines}\PY{p}{(}\PY{n}{binary}\PY{p}{)}\PY{p}{:}
+            \PY{c+c1}{\PYZsh{} calculate the current base leftx and rightx pixels location}
+            \PY{n}{image\PYZus{}height}\PY{o}{=}\PY{n}{binary}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+            \PY{n}{image\PYZus{}width}\PY{o}{=}\PY{n}{binary}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}
+            \PY{n}{histogram}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{binary}\PY{p}{[}\PY{n}{binary}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{/}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{:}\PY{p}{,}\PY{p}{:}\PY{p}{]}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+            \PY{n}{midpoint}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{int}\PY{p}{(}\PY{n}{binary}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{/}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{)}
+            \PY{n}{leftx\PYZus{}base}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{argmax}\PY{p}{(}\PY{n}{histogram}\PY{p}{[}\PY{p}{:}\PY{n}{midpoint}\PY{p}{]}\PY{p}{)}           \PY{c+c1}{\PYZsh{} define the base left lanes location}
+            \PY{n}{rightx\PYZus{}base}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{argmax}\PY{p}{(}\PY{n}{histogram}\PY{p}{[}\PY{n}{midpoint}\PY{p}{:}\PY{p}{]}\PY{p}{)}\PY{o}{+}\PY{n}{midpoint}  \PY{c+c1}{\PYZsh{} define the base right lanes location}
+            \PY{n}{leftx\PYZus{}current}\PY{o}{=}\PY{n}{leftx\PYZus{}base}
+            \PY{n}{rightx\PYZus{}current}\PY{o}{=}\PY{n}{rightx\PYZus{}base}
+            \PY{n}{out\PYZus{}img}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{dstack}\PY{p}{(}\PY{p}{(}\PY{n}{binary}\PY{p}{,} \PY{n}{binary}\PY{p}{,} \PY{n}{binary}\PY{p}{)}\PY{p}{)}
+            \PY{c+c1}{\PYZsh{} nonzero x \PYZam{} y locations}
+            \PY{n}{nonzerox}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{binary}\PY{o}{.}\PY{n}{nonzero}\PY{p}{(}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+            \PY{n}{nonzeroy}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{binary}\PY{o}{.}\PY{n}{nonzero}\PY{p}{(}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+            \PY{c+c1}{\PYZsh{} left and right lane lines indices}
+            \PY{n}{leftx\PYZus{}ind}\PY{p}{,} \PY{n}{rightx\PYZus{}ind}\PY{o}{=}\PY{p}{[}\PY{p}{]}\PY{p}{,}\PY{p}{[}\PY{p}{]}
+            \PY{c+c1}{\PYZsh{} Hyper parameters for windows}
+            \PY{n}{nwindow}\PY{o}{=}\PY{l+m+mi}{9}
+            \PY{n}{margin}\PY{o}{=}\PY{l+m+mi}{100}
+            \PY{n}{minpxl}\PY{o}{=}\PY{l+m+mi}{50}
+            
+            \PY{k}{for} \PY{n}{window} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{nwindow}\PY{p}{)}\PY{p}{:}
+                \PY{c+c1}{\PYZsh{} define the parameters of windwos on image}
+                \PY{n}{win\PYZus{}height}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{int}\PY{p}{(}\PY{n}{image\PYZus{}height}\PY{o}{/}\PY{o}{/}\PY{n}{nwindow}\PY{p}{)}
+                \PY{n}{win\PYZus{}y\PYZus{}low}\PY{o}{=}\PY{n}{image\PYZus{}height}\PY{o}{\PYZhy{}}\PY{p}{(}\PY{n}{window}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}\PY{o}{*}\PY{n}{win\PYZus{}height}
+                \PY{n}{win\PYZus{}y\PYZus{}high}\PY{o}{=}\PY{n}{image\PYZus{}height}\PY{o}{\PYZhy{}}\PY{n}{window}\PY{o}{*}\PY{n}{win\PYZus{}height}
+                \PY{n}{win\PYZus{}left\PYZus{}low}\PY{o}{=}\PY{n}{leftx\PYZus{}current}\PY{o}{\PYZhy{}}\PY{n}{margin}
+                \PY{n}{win\PYZus{}left\PYZus{}high}\PY{o}{=}\PY{n}{leftx\PYZus{}current}\PY{o}{+}\PY{n}{margin}
+                \PY{n}{win\PYZus{}right\PYZus{}low}\PY{o}{=}\PY{n}{rightx\PYZus{}current}\PY{o}{\PYZhy{}}\PY{n}{margin}
+                \PY{n}{win\PYZus{}right\PYZus{}high}\PY{o}{=}\PY{n}{rightx\PYZus{}current}\PY{o}{+}\PY{n}{margin}
+                
+                \PY{c+c1}{\PYZsh{} identify the nonzero pixels within the window}
+                \PY{n}{detected\PYZus{}leftx\PYZus{}ind}\PY{o}{=}\PY{p}{(}\PY{p}{(}\PY{n}{nonzeroy} \PY{o}{\PYZgt{}}\PY{o}{=} \PY{n}{win\PYZus{}y\PYZus{}low}\PY{p}{)} \PY{o}{\PYZam{}} \PY{p}{(}\PY{n}{nonzeroy} \PY{o}{\PYZlt{}} \PY{n}{win\PYZus{}y\PYZus{}high}\PY{p}{)} \PY{o}{\PYZam{}} 
+                \PY{p}{(}\PY{n}{nonzerox} \PY{o}{\PYZgt{}}\PY{o}{=} \PY{n}{win\PYZus{}left\PYZus{}low}\PY{p}{)} \PY{o}{\PYZam{}}  \PY{p}{(}\PY{n}{nonzerox} \PY{o}{\PYZlt{}} \PY{n}{win\PYZus{}left\PYZus{}high}\PY{p}{)}\PY{p}{)}\PY{o}{.}\PY{n}{nonzero}\PY{p}{(}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+                
+                \PY{n}{detected\PYZus{}rightx\PYZus{}ind}\PY{o}{=}\PY{p}{(}\PY{p}{(}\PY{n}{nonzeroy} \PY{o}{\PYZgt{}}\PY{o}{=} \PY{n}{win\PYZus{}y\PYZus{}low}\PY{p}{)} \PY{o}{\PYZam{}} \PY{p}{(}\PY{n}{nonzeroy} \PY{o}{\PYZlt{}} \PY{n}{win\PYZus{}y\PYZus{}high}\PY{p}{)} \PY{o}{\PYZam{}} 
+                \PY{p}{(}\PY{n}{nonzerox} \PY{o}{\PYZgt{}}\PY{o}{=} \PY{n}{win\PYZus{}right\PYZus{}low}\PY{p}{)} \PY{o}{\PYZam{}}  \PY{p}{(}\PY{n}{nonzerox} \PY{o}{\PYZlt{}} \PY{n}{win\PYZus{}right\PYZus{}high}\PY{p}{)}\PY{p}{)}\PY{o}{.}\PY{n}{nonzero}\PY{p}{(}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+                
+                \PY{k}{if} \PY{n+nb}{len}\PY{p}{(}\PY{n}{detected\PYZus{}leftx\PYZus{}ind}\PY{p}{)}\PY{o}{\PYZgt{}}\PY{n}{minpxl}\PY{p}{:}
+                    \PY{n}{leftx\PYZus{}current}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{int}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{nonzerox}\PY{p}{[}\PY{n}{detected\PYZus{}leftx\PYZus{}ind}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+                \PY{k}{if} \PY{n+nb}{len}\PY{p}{(}\PY{n}{detected\PYZus{}rightx\PYZus{}ind}\PY{p}{)}\PY{o}{\PYZgt{}}\PY{n}{minpxl}\PY{p}{:}
+                    \PY{n}{rightx\PYZus{}current}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{int}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{nonzerox}\PY{p}{[}\PY{n}{detected\PYZus{}rightx\PYZus{}ind}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+                \PY{n}{leftx\PYZus{}ind}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{detected\PYZus{}leftx\PYZus{}ind}\PY{p}{)}
+                \PY{n}{rightx\PYZus{}ind}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{detected\PYZus{}rightx\PYZus{}ind}\PY{p}{)}
+            \PY{k}{try}\PY{p}{:}
+                \PY{n}{leftx\PYZus{}ind}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{concatenate}\PY{p}{(}\PY{n}{leftx\PYZus{}ind}\PY{p}{)}
+                \PY{n}{rightx\PYZus{}ind}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{concatenate}\PY{p}{(}\PY{n}{rightx\PYZus{}ind}\PY{p}{)}
+            \PY{k}{except} \PY{n}{ValueErrors}\PY{p}{:}
+                
+                \PY{k}{pass}
+            
+            \PY{n}{leftx}\PY{o}{=}\PY{n}{nonzerox}\PY{p}{[}\PY{n}{leftx\PYZus{}ind}\PY{p}{]}
+            \PY{n}{rightx}\PY{o}{=}\PY{n}{nonzerox}\PY{p}{[}\PY{n}{rightx\PYZus{}ind}\PY{p}{]}
+            \PY{n}{lefty}\PY{o}{=}\PY{n}{nonzeroy}\PY{p}{[}\PY{n}{leftx\PYZus{}ind}\PY{p}{]}
+            \PY{n}{righty}\PY{o}{=}\PY{n}{nonzeroy}\PY{p}{[}\PY{n}{rightx\PYZus{}ind}\PY{p}{]}
+            
+            \PY{k}{return} \PY{n}{leftx}\PY{p}{,} \PY{n}{lefty}\PY{p}{,} \PY{n}{rightx}\PY{p}{,} \PY{n}{righty}\PY{p}{,} \PY{n}{out\PYZus{}img}
+        
+        \PY{c+c1}{\PYZsh{} define polynomial function of lane lines}
+        
+        \PY{k}{def} \PY{n+nf}{polynomial\PYZus{}fit}\PY{p}{(}\PY{n}{binary}\PY{p}{,} \PY{n}{Minv}\PY{p}{)}\PY{p}{:}
+            \PY{c+c1}{\PYZsh{} Find our lane pixels first}
+            \PY{n}{leftx}\PY{p}{,} \PY{n}{lefty}\PY{p}{,} \PY{n}{rightx}\PY{p}{,} \PY{n}{righty}\PY{p}{,} \PY{n}{out\PYZus{}img} \PY{o}{=} \PY{n}{find\PYZus{}lines}\PY{p}{(}\PY{n}{binary}\PY{p}{)}
+            \PY{c+c1}{\PYZsh{} Fit a second order polynomial to each using `np.polyfit`}
+            \PY{n}{left\PYZus{}fit} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{polyfit}\PY{p}{(}\PY{n}{lefty}\PY{p}{,} \PY{n}{leftx}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{)}
+            \PY{n}{right\PYZus{}fit} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{polyfit}\PY{p}{(}\PY{n}{righty}\PY{p}{,} \PY{n}{rightx}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{)}
+            \PY{c+c1}{\PYZsh{} Generate x and y values for plotting}
+            \PY{n}{ploty} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{linspace}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{binary}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{binary}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{p}{)}
+            \PY{k}{try}\PY{p}{:}
+                \PY{n}{left\PYZus{}fitx} \PY{o}{=} \PY{n}{left\PYZus{}fit}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{*}\PY{n}{ploty}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2} \PY{o}{+} \PY{n}{left\PYZus{}fit}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{*}\PY{n}{ploty} \PY{o}{+} \PY{n}{left\PYZus{}fit}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}
+                \PY{n}{right\PYZus{}fitx} \PY{o}{=} \PY{n}{right\PYZus{}fit}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{*}\PY{n}{ploty}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2} \PY{o}{+} \PY{n}{right\PYZus{}fit}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{*}\PY{n}{ploty} \PY{o}{+} \PY{n}{right\PYZus{}fit}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}
+            \PY{k}{except} \PY{n+ne}{TypeError}\PY{p}{:}
+                \PY{c+c1}{\PYZsh{} Avoids an error if `left` and `right\PYZus{}fit` are still none or incorrect}
+                \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{The function failed to fit a line!}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                \PY{n}{left\PYZus{}fitx} \PY{o}{=} \PY{l+m+mi}{1}\PY{o}{*}\PY{n}{ploty}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2} \PY{o}{+} \PY{l+m+mi}{1}\PY{o}{*}\PY{n}{ploty}
+                \PY{n}{right\PYZus{}fitx} \PY{o}{=} \PY{l+m+mi}{1}\PY{o}{*}\PY{n}{ploty}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2} \PY{o}{+} \PY{l+m+mi}{1}\PY{o}{*}\PY{n}{ploty}
+            
+            \PY{c+c1}{\PYZsh{} Create an image to draw the lines on}
+            \PY{n}{warp\PYZus{}zero} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros\PYZus{}like}\PY{p}{(}\PY{n}{binary}\PY{p}{)}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{uint8}\PY{p}{)}
+            \PY{n}{color\PYZus{}warp} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{dstack}\PY{p}{(}\PY{p}{(}\PY{n}{warp\PYZus{}zero}\PY{p}{,} \PY{n}{warp\PYZus{}zero}\PY{p}{,} \PY{n}{warp\PYZus{}zero}\PY{p}{)}\PY{p}{)}
+        
+            \PY{c+c1}{\PYZsh{} Recast the x and y points into usable format for cv2.fillPoly()}
+            \PY{n}{pts\PYZus{}left} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{n}{np}\PY{o}{.}\PY{n}{transpose}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{vstack}\PY{p}{(}\PY{p}{[}\PY{n}{left\PYZus{}fitx}\PY{p}{,} \PY{n}{ploty}\PY{p}{]}\PY{p}{)}\PY{p}{)}\PY{p}{]}\PY{p}{)}
+            \PY{n}{pts\PYZus{}right} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{n}{np}\PY{o}{.}\PY{n}{flipud}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{transpose}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{vstack}\PY{p}{(}\PY{p}{[}\PY{n}{right\PYZus{}fitx}\PY{p}{,} \PY{n}{ploty}\PY{p}{]}\PY{p}{)}\PY{p}{)}\PY{p}{)}\PY{p}{]}\PY{p}{)}
+            \PY{n}{pts} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{hstack}\PY{p}{(}\PY{p}{(}\PY{n}{pts\PYZus{}left}\PY{p}{,} \PY{n}{pts\PYZus{}right}\PY{p}{)}\PY{p}{)}
+        
+            \PY{c+c1}{\PYZsh{} Draw the lane onto the warped blank image}
+            \PY{n}{cv2}\PY{o}{.}\PY{n}{fillPoly}\PY{p}{(}\PY{n}{color\PYZus{}warp}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{int\PYZus{}}\PY{p}{(}\PY{p}{[}\PY{n}{pts}\PY{p}{]}\PY{p}{)}\PY{p}{,} \PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{255}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{)}\PY{p}{)}
+            \PY{c+c1}{\PYZsh{} Warp the blank back to original image space using inverse perspective matrix (Minv)}
+            \PY{n}{newwarp} \PY{o}{=} \PY{n}{cv2}\PY{o}{.}\PY{n}{warpPerspective}\PY{p}{(}\PY{n}{color\PYZus{}warp}\PY{p}{,} \PY{n}{Minv}\PY{p}{,} \PY{p}{(}\PY{n}{binary}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{binary}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{)} 
+            
+        
+            \PY{c+c1}{\PYZsh{}\PYZsh{} Visualization \PYZsh{}\PYZsh{}}
+            \PY{c+c1}{\PYZsh{} Colors in the left and right lane regions}
+            \PY{n}{out\PYZus{}img}\PY{p}{[}\PY{n}{lefty}\PY{p}{,} \PY{n}{leftx}\PY{p}{]} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{255}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}
+            \PY{n}{out\PYZus{}img}\PY{p}{[}\PY{n}{righty}\PY{p}{,} \PY{n}{rightx}\PY{p}{]} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{255}\PY{p}{]}
+        
+            \PY{c+c1}{\PYZsh{} Plots the left and right polynomials on the lane lines}
+            \PY{c+c1}{\PYZsh{}plt.plot(left\PYZus{}fitx, ploty, color=\PYZsq{}yellow\PYZsq{})}
+            \PY{c+c1}{\PYZsh{}plt.plot(right\PYZus{}fitx, ploty, color=\PYZsq{}yellow\PYZsq{})}
+            \PY{k}{return} \PY{n}{out\PYZus{}img}\PY{p}{,} \PY{n}{newwarp}
+        
+        \PY{k}{def} \PY{n+nf}{curvature\PYZus{}cal}\PY{p}{(}\PY{n}{binary}\PY{p}{)}\PY{p}{:}
+            \PY{c+c1}{\PYZsh{} Find our lane pixels first}
+            \PY{n}{leftx}\PY{p}{,} \PY{n}{lefty}\PY{p}{,} \PY{n}{rightx}\PY{p}{,} \PY{n}{righty}\PY{p}{,} \PY{n}{out\PYZus{}img} \PY{o}{=} \PY{n}{find\PYZus{}lines}\PY{p}{(}\PY{n}{binary}\PY{p}{)}
+            \PY{c+c1}{\PYZsh{} covert x, y from pixels to meters}
+            \PY{n}{ym\PYZus{}per\PYZus{}pix} \PY{o}{=} \PY{l+m+mi}{30}\PY{o}{/}\PY{l+m+mi}{720} \PY{c+c1}{\PYZsh{} meters per pixel in y dimension}
+            \PY{n}{xm\PYZus{}per\PYZus{}pix} \PY{o}{=} \PY{l+m+mf}{3.7}\PY{o}{/}\PY{l+m+mi}{700} \PY{c+c1}{\PYZsh{} meters per pixel in x dimension}
+            
+            \PY{n}{image\PYZus{}height}\PY{o}{=}\PY{n}{binary}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+            \PY{n}{image\PYZus{}width}\PY{o}{=}\PY{n}{binary}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}
+            \PY{n}{histogram}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{binary}\PY{p}{[}\PY{n}{binary}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{/}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{:}\PY{p}{,}\PY{p}{:}\PY{p}{]}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+            \PY{n}{midpoint}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{int}\PY{p}{(}\PY{n}{binary}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{/}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{)}
+            \PY{n}{leftx\PYZus{}base}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{argmax}\PY{p}{(}\PY{n}{histogram}\PY{p}{[}\PY{p}{:}\PY{n}{midpoint}\PY{p}{]}\PY{p}{)}           \PY{c+c1}{\PYZsh{} define the base left lanes location}
+            \PY{n}{rightx\PYZus{}base}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{argmax}\PY{p}{(}\PY{n}{histogram}\PY{p}{[}\PY{n}{midpoint}\PY{p}{:}\PY{p}{]}\PY{p}{)}\PY{o}{+}\PY{n}{midpoint}  \PY{c+c1}{\PYZsh{} define the base right lanes location}
+            \PY{n}{lane\PYZus{}center}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{int}\PY{p}{(}\PY{p}{(}\PY{n}{leftx\PYZus{}base}\PY{o}{+}\PY{n}{rightx\PYZus{}base}\PY{p}{)}\PY{o}{/}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{)}
+            \PY{n}{img\PYZus{}center}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{int}\PY{p}{(}\PY{n}{image\PYZus{}width}\PY{o}{/}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{)}
+            \PY{n}{Veh\PYZus{}pos}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{float32}\PY{p}{(}\PY{p}{(}\PY{n}{img\PYZus{}center}\PY{o}{\PYZhy{}}\PY{n}{lane\PYZus{}center}\PY{p}{)}\PY{o}{*}\PY{n}{xm\PYZus{}per\PYZus{}pix}\PY{p}{)}  \PY{c+c1}{\PYZsh{} calculate the vehicel position, left \PYZsq{}\PYZhy{}\PYZsq{}, right off center \PYZsq{}+\PYZsq{}}
+            
+            \PY{c+c1}{\PYZsh{} Fit a second order polynomial to each using `np.polyfit`}
+            \PY{n}{left\PYZus{}fit\PYZus{}cr} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{polyfit}\PY{p}{(}\PY{n}{lefty}\PY{o}{*}\PY{n}{ym\PYZus{}per\PYZus{}pix}\PY{p}{,} \PY{n}{leftx}\PY{o}{*}\PY{n}{xm\PYZus{}per\PYZus{}pix}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{)}
+            \PY{n}{right\PYZus{}fit\PYZus{}cr} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{polyfit}\PY{p}{(}\PY{n}{righty}\PY{o}{*}\PY{n}{ym\PYZus{}per\PYZus{}pix}\PY{p}{,} \PY{n}{rightx}\PY{o}{*}\PY{n}{xm\PYZus{}per\PYZus{}pix}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{)}
+        
+            \PY{c+c1}{\PYZsh{} Generate x and y values for plotting}
+            \PY{n}{ploty} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{linspace}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{binary}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{binary}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{p}{)}
+            \PY{n}{y\PYZus{}eval}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{max}\PY{p}{(}\PY{n}{ploty}\PY{p}{)}
+            \PY{n}{left\PYZus{}curverad} \PY{o}{=} \PY{p}{(}\PY{p}{(}\PY{l+m+mi}{1} \PY{o}{+} \PY{p}{(}\PY{l+m+mi}{2}\PY{o}{*}\PY{n}{left\PYZus{}fit\PYZus{}cr}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{*}\PY{n}{y\PYZus{}eval}\PY{o}{*}\PY{n}{ym\PYZus{}per\PYZus{}pix} \PY{o}{+} \PY{n}{left\PYZus{}fit\PYZus{}cr}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{l+m+mf}{1.5}\PY{p}{)} \PY{o}{/} \PY{n}{np}\PY{o}{.}\PY{n}{absolute}\PY{p}{(}\PY{l+m+mi}{2}\PY{o}{*}\PY{n}{left\PYZus{}fit\PYZus{}cr}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+            \PY{n}{right\PYZus{}curverad} \PY{o}{=} \PY{p}{(}\PY{p}{(}\PY{l+m+mi}{1} \PY{o}{+} \PY{p}{(}\PY{l+m+mi}{2}\PY{o}{*}\PY{n}{right\PYZus{}fit\PYZus{}cr}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{*}\PY{n}{y\PYZus{}eval}\PY{o}{*}\PY{n}{ym\PYZus{}per\PYZus{}pix} \PY{o}{+} \PY{n}{right\PYZus{}fit\PYZus{}cr}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{l+m+mf}{1.5}\PY{p}{)} \PY{o}{/} \PY{n}{np}\PY{o}{.}\PY{n}{absolute}\PY{p}{(}\PY{l+m+mi}{2}\PY{o}{*}\PY{n}{right\PYZus{}fit\PYZus{}cr}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+            \PY{n}{lane\PYZus{}curverad}\PY{o}{=}\PY{p}{(}\PY{n}{left\PYZus{}curverad}\PY{o}{+}\PY{n}{right\PYZus{}curverad}\PY{p}{)}\PY{o}{/}\PY{l+m+mi}{2}
+        
+            \PY{k}{return} \PY{n}{lane\PYZus{}curverad}\PY{p}{,} \PY{n}{Veh\PYZus{}pos}
+        
+        \PY{k}{def} \PY{n+nf}{process\PYZus{}image}\PY{p}{(}\PY{n}{img}\PY{p}{)}\PY{p}{:}
+            \PY{c+c1}{\PYZsh{} print out some info about this image}
+            \PY{c+c1}{\PYZsh{}img=cv2.cvtColor(img, cv2.COLOR\PYZus{}BGR2RGB)}
+            \PY{c+c1}{\PYZsh{} transform from color to gray scale}
+            \PY{c+c1}{\PYZsh{}b,g,r=cv2.split(img)}
+            \PY{c+c1}{\PYZsh{}img=cv2.merge([r,g,b])}
+            \PY{n}{img\PYZus{}gray}\PY{o}{=}\PY{n}{cv2}\PY{o}{.}\PY{n}{cvtColor}\PY{p}{(}\PY{n}{img}\PY{p}{,}\PY{n}{cv2}\PY{o}{.}\PY{n}{COLOR\PYZus{}RGB2GRAY}\PY{p}{)} \PY{c+c1}{\PYZsh{}mpimg loads image as RGB}
+            \PY{c+c1}{\PYZsh{} Apply Gaussian smoothing }
+            \PY{c+c1}{\PYZsh{}kernel\PYZus{}size=5}
+            \PY{c+c1}{\PYZsh{}blur\PYZus{}gray=cv2.GaussianBlur(img\PYZus{}gray,(kernel\PYZus{}size,kernel\PYZus{}size),0,0)}
+            \PY{c+c1}{\PYZsh{} Undistort the image}
+        
+            \PY{n}{undistort\PYZus{}img}\PY{o}{=}\PY{n}{undistortion}\PY{p}{(}\PY{n}{img}\PY{p}{)}
+            \PY{c+c1}{\PYZsh{}color \PYZam{} gradients threshold}
+            \PY{n}{img\PYZus{}warped}\PY{p}{,} \PY{n}{perspective\PYZus{}M}\PY{p}{,} \PY{n}{Minv}\PY{o}{=}\PY{n}{warped\PYZus{}img}\PY{p}{(}\PY{n}{undistort\PYZus{}img}\PY{p}{)}
+            \PY{n}{warped\PYZus{}binary}\PY{o}{=}\PY{n}{gradient\PYZus{}threshold}\PY{p}{(}\PY{n}{img\PYZus{}warped}\PY{p}{,} \PY{n}{thresh\PYZus{}grad\PYZus{}min}\PY{p}{,} \PY{n}{thresh\PYZus{}grad\PYZus{}max}\PY{p}{,} \PY{n}{color\PYZus{}thre\PYZus{}min}\PY{p}{,} \PY{n}{color\PYZus{}thre\PYZus{}max}\PY{p}{)}
+        
+            \PY{n}{out\PYZus{}img}\PY{p}{,} \PY{n}{newwarp}\PY{o}{=}\PY{n}{polynomial\PYZus{}fit}\PY{p}{(}\PY{n}{warped\PYZus{}binary}\PY{p}{,}\PY{n}{Minv}\PY{p}{)}
+            \PY{n}{lane\PYZus{}curverad}\PY{p}{,} \PY{n}{Veh\PYZus{}pos}\PY{o}{=}\PY{n}{curvature\PYZus{}cal}\PY{p}{(}\PY{n}{warped\PYZus{}binary}\PY{p}{)}
+            \PY{c+c1}{\PYZsh{} Combine the result with the original image}
+            \PY{n}{result} \PY{o}{=} \PY{n}{cv2}\PY{o}{.}\PY{n}{addWeighted}\PY{p}{(}\PY{n}{undistort\PYZus{}img}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{n}{newwarp}\PY{p}{,} \PY{l+m+mf}{0.3}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{)}
+            \PY{k}{if} \PY{n}{Veh\PYZus{}pos} \PY{o}{\PYZgt{}} \PY{l+m+mi}{0}\PY{p}{:}
+                \PY{n}{car\PYZus{}pos\PYZus{}text} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+si}{\PYZob{}:04.2f\PYZcb{}}\PY{l+s+s2}{m right off center}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{Veh\PYZus{}pos}\PY{p}{)}
+            \PY{k}{else}\PY{p}{:}
+                \PY{n}{car\PYZus{}pos\PYZus{}text} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+si}{\PYZob{}:04.3f\PYZcb{}}\PY{l+s+s1}{m left off center}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n+nb}{abs}\PY{p}{(}\PY{n}{Veh\PYZus{}pos}\PY{p}{)}\PY{p}{)}
+        
+            \PY{n}{cv2}\PY{o}{.}\PY{n}{putText}\PY{p}{(}\PY{n}{result}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Lane curve: }\PY{l+s+si}{\PYZob{}:04.2f\PYZcb{}}\PY{l+s+s2}{m}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{lane\PYZus{}curverad}\PY{p}{)}\PY{p}{,} \PY{p}{(}\PY{l+m+mi}{10}\PY{p}{,} \PY{l+m+mi}{50}\PY{p}{)}\PY{p}{,} \PY{n}{cv2}\PY{o}{.}\PY{n}{FONT\PYZus{}HERSHEY\PYZus{}SIMPLEX}\PY{p}{,} \PY{l+m+mf}{1.5}\PY{p}{,}
+                        \PY{n}{color}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{255}\PY{p}{,} \PY{l+m+mi}{255}\PY{p}{,} \PY{l+m+mi}{255}\PY{p}{)}\PY{p}{,} \PY{n}{thickness}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{)}
+            \PY{n}{cv2}\PY{o}{.}\PY{n}{putText}\PY{p}{(}\PY{n}{result}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Car is }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{car\PYZus{}pos\PYZus{}text}\PY{p}{)}\PY{p}{,} \PY{p}{(}\PY{l+m+mi}{10}\PY{p}{,} \PY{l+m+mi}{100}\PY{p}{)}\PY{p}{,} \PY{n}{cv2}\PY{o}{.}\PY{n}{FONT\PYZus{}HERSHEY\PYZus{}SIMPLEX}\PY{p}{,} \PY{l+m+mf}{1.5}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{255}\PY{p}{,} \PY{l+m+mi}{255}\PY{p}{,} \PY{l+m+mi}{255}\PY{p}{)}\PY{p}{,}
+                        \PY{n}{thickness}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{)}
+        
+            \PY{k}{return} \PY{n}{result}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{k+kn}{from} \PY{n+nn}{IPython}\PY{n+nn}{.}\PY{n+nn}{display} \PY{k}{import} \PY{n}{HTML}
+        \PY{n}{white\PYZus{}output} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{final\PYZus{}result.mp4}\PY{l+s+s1}{\PYZsq{}}
+        \PY{c+c1}{\PYZsh{}\PYZsh{} To speed up the testing process you may want to try your pipeline on a shorter subclip of the video}
+        \PY{c+c1}{\PYZsh{}\PYZsh{} To do so add .subclip(start\PYZus{}second,end\PYZus{}second) to the end of the line below}
+        \PY{c+c1}{\PYZsh{}\PYZsh{} Where start\PYZus{}second and end\PYZus{}second are integer values representing the start and end of the subclip}
+        \PY{c+c1}{\PYZsh{}\PYZsh{} You may also uncomment the following line for a subclip of the first 5 seconds}
+        \PY{c+c1}{\PYZsh{}\PYZsh{}clip1 = VideoFileClip(\PYZdq{}test\PYZus{}videos/solidWhiteRight.mp4\PYZdq{}).subclip(0,5)}
+        \PY{n}{clip1} \PY{o}{=} \PY{n}{VideoFileClip}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{../project\PYZus{}video.mp4}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{white\PYZus{}clip} \PY{o}{=} \PY{n}{clip1}\PY{o}{.}\PY{n}{fl\PYZus{}image}\PY{p}{(}\PY{n}{process\PYZus{}image}\PY{p}{)} \PY{c+c1}{\PYZsh{}NOTE: this function expects color images!!}
+        \PY{o}{\PYZpc{}}\PY{k}{time} white\PYZus{}clip.write\PYZus{}videofile(white\PYZus{}output, audio=False)  
+        
+        \PY{n}{HTML}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}\PYZdq{}\PYZdq{}}
+        \PY{l+s+s2}{\PYZlt{}video width=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{960}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ height=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{540}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ controls\PYZgt{}}
+        \PY{l+s+s2}{  \PYZlt{}source src=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+si}{\PYZob{}0\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZgt{}}
+        \PY{l+s+s2}{\PYZlt{}/video\PYZgt{}}
+        \PY{l+s+s2}{\PYZdq{}\PYZdq{}\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{white\PYZus{}output}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \subsubsection{Discussion}\label{discussion}
+
+\paragraph{1. Briefly discuss any problems / issues you faced in your
+implementation of this project. Where will your pipeline likely fail?
+What could you do to make it more
+robust?}\label{briefly-discuss-any-problems-issues-you-faced-in-your-implementation-of-this-project.-where-will-your-pipeline-likely-fail-what-could-you-do-to-make-it-more-robust}
+
+Here I'll talk about the approach I took, what techniques I used, what
+worked and why, where the pipeline might fail and how I might improve it
+if I were going to pursue this project further.
+
+I basically used all techniques that were dicussed in the lectures, such
+as camera calibration, distortion correction, perspective transforms, as
+well as color \& gradients threshold, etc. However, although all
+techiques that I have adopted and applied for my lane detection
+algorithms are not quite robust, especially when it came into some
+shadow condition, and dirty roads as well as discoration, my algorithms
+sometimes failed at those condition. I hope to revise those strategies
+in the future.
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
